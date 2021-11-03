@@ -27,6 +27,31 @@
   <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
+  <style>    
+    input[type=text], select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
+    }
+    
+    input[type=submit] {
+      background-color: #04AA6D;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+    </style>
 </head>
 
 <body class="bg-default">
@@ -90,41 +115,89 @@
     <div class="container mt--8 pb-5">
       <!-- Table -->
       <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8">
+        <div class="col-lg-8 col-md-8">
           <div class="card bg-secondary border-0">
             <div class="card-body px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">
                 <small>Sign up with credentials</small>
               </div>
-              <form role="form">
-                <div class="form-group">
-                  <div class="input-group input-group-merge input-group-alternative mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+              <form>
+                <h6 class="heading-small text-muted mb-4">User information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-first-name">First name</label>
+                        <input type="text" id="input-first-name" class="form-control" placeholder="First Name...">
+                      </div>
                     </div>
-                    <input class="form-control" placeholder="Name" type="text">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-last-name">Last name</label>
+                        <input type="text" id="input-last-name" class="form-control" placeholder="Last Name...">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-username">NIC</label>
+                        <input type="text" id="input-username" class="form-control" placeholder="12345678v">
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-email">Email address</label>
+                        <input type="email" id="input-email" class="form-control" placeholder="jesse@example.com">
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label for="country"><b>Gender</b></label>
+                  <select id="country" name="country">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="form-group">
-                  <div class="input-group input-group-merge input-group-alternative mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                <hr class="my-4" />
+                <!-- Address -->
+                <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-address">Address</label>
+                        <input id="input-address" class="form-control" placeholder="Home Address..." type="text">
+                      </div>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email">
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-city">Mobile Number</label>
+                        <input type="number" id="input-city" class="form-control" placeholder="Add your mobile number...">
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-country">Age</label>
+                        <input type="text" id="input-country" class="form-control" placeholder="Age...">
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-country">Date of Birth</label>
+                        <input type="number" id="input-postal-code" class="form-control" placeholder="DOB">
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="form-group">
-                  <div class="input-group input-group-merge input-group-alternative">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                    </div>
-                    <input class="form-control" placeholder="Password" type="password">
-                  </div>
-                </div>
-                <div class="text-center">
-                  <button type="button" class="btn btn-primary mt-4">Create account</button>
-                </div>
-              </form>
+                <hr class="my-4" />
+                <!-- Description -->
+                </form>
             </div>
           </div>
         </div>

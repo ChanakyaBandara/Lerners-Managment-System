@@ -32,6 +32,40 @@
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
+  <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
+    
+    input[type=text], select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
+    }
+    
+    input[type=submit] {
+      background-color: #04AA6D;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+    
+    .container {
+      border-radius: 5px;
+      background-color: #ffffff;
+      padding: 20px;
+    }
+    </style>
 </head>
 
 <body>
@@ -329,6 +363,44 @@
     </div>
     <!-- Page content -->
     <div class="container-fluid mt--6">
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Insert Schedule</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <div class="container">
+                <form action="/action_page.php">
+                  <label for="fname"><b>Name</b></label>
+                  <input type="text" id="fname" name="firstname" placeholder="Schedule Name">
+
+                  <label for="fname"><b>Day</b></label>
+                  <input type="text" id="fname" name="firstname" placeholder="Day">
+              
+                  <label for="country"><b>Duration</b></label>
+                  <select id="country" name="country">
+                    <option value="1 month">1 month</option>
+                    <option value="2 month">2 month</option>
+                    <option value="3 month">3 month</option>
+                    <option value="4 month">4 month</option>
+                  </select>
+              
+                  <input type="submit" value="Submit">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-xl-12">
           <div class="card">
