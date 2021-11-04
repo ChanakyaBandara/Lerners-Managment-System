@@ -21,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Student Payment</title>
+  <title>Admin View Students</title>
   <!-- Favicon -->
   <link rel="icon" href="assets/img/brand/favicon.png" type="image/png">
   <!-- Fonts -->
@@ -32,111 +32,6 @@
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
-  <style>
-    body {
-      font-family: Arial;
-      font-size: 17px;
-      padding: 8px;
-    }
-    
-    * {
-      box-sizing: border-box;
-    }
-    
-    .row {
-      display: -ms-flexbox; /* IE10 */
-      display: flex;
-      -ms-flex-wrap: wrap; /* IE10 */
-      flex-wrap: wrap;
-      margin: 0 -16px;
-    }
-    
-    .col-25 {
-      -ms-flex: 25%; /* IE10 */
-      flex: 25%;
-    }
-    
-    .col-50 {
-      -ms-flex: 50%; /* IE10 */
-      flex: 50%;
-    }
-    
-    .col-75 {
-      -ms-flex: 75%; /* IE10 */
-      flex: 75%;
-    }
-    
-    .col-25,
-    .col-50,
-    .col-75 {
-      padding: 0 16px;
-    }
-    
-    .container {
-      background-color: #f2f2f2;
-      padding: 5px 20px 15px 20px;
-      border: 1px solid lightgrey;
-      border-radius: 3px;
-    }
-    
-    input[type=text] {
-      width: 100%;
-      margin-bottom: 20px;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-    }
-    
-    label {
-      margin-bottom: 10px;
-      display: block;
-    }
-    
-    .icon-container {
-      margin-bottom: 20px;
-      padding: 7px 0;
-      font-size: 24px;
-    }
-    
-    .btn1 {
-      background-color: #04AA6D;
-      color: white;
-      padding: 12px;
-      margin: 10px 0;
-      border: none;
-      width: 100%;
-      border-radius: 3px;
-      cursor: pointer;
-      font-size: 17px;
-    }
-    
-    .btn1:hover {
-      background-color: #45a049;
-    }
-    
-    a {
-      color: #2196F3;
-    }
-    
-    hr {
-      border: 1px solid lightgrey;
-    }
-    
-    span.price {
-      float: right;
-      color: grey;
-    }
-    
-    /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
-    @media (max-width: 800px) {
-      .row {
-        flex-direction: column-reverse;
-      }
-      .col-25 {
-        margin-bottom: 20px;
-      }
-    }
-    </style>
 </head>
 
 <body>
@@ -155,51 +50,39 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="student_login.html">
+              <a class="nav-link" href="admin_login.html">
                 <i class="ni ni-key-25 text-info"></i>
                 <span class="nav-link-text">Login</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="student_register.html">
-                <i class="ni ni-circle-08 text-pink"></i>
-                <span class="nav-link-text">Register</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="student_index.html">
+              <a class="nav-link" href="admin_index.html">
                 <i class="ni ni-tv-2 text-primary"></i>
                 <span class="nav-link-text">Dashboard</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="student_payment.html">
+              <a class="nav-link" href="admin_view_learners.html">
                 <i class="ni ni-planet text-orange"></i>
-                <span class="nav-link-text">Payment</span>
+                <span class="nav-link-text">View learners</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="student_exam.html">
+              <a class="nav-link active" href="admin_view_students.html">
                 <i class="ni ni-pin-3 text-primary"></i>
-                <span class="nav-link-text">Exam</span>
+                <span class="nav-link-text">View Students</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="student_schedule.html">
+              <a class="nav-link" href="admin_view_payments.html">
                 <i class="ni ni-bullet-list-67 text-default"></i>
-                <span class="nav-link-text">Schedule</span>
+                <span class="nav-link-text">View Payments</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="student_profile.html">
+              <a class="nav-link" href="admin_exam_summary.html">
                 <i class="ni ni-single-02 text-yellow"></i>
-                <span class="nav-link-text">Profile</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="student_learners.html">
-                <i class="ni ni-single-02 text-red"></i>
-                <span class="nav-link-text">Learner's Profile</span>
+                <span class="nav-link-text">Exam Summary</span>
               </a>
             </li>
           </ul>
@@ -215,13 +98,13 @@
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
-          <div class="col-lg-6 col-7">
-            <h6 class="h2 text-white d-inline-block mb-0">Student Payments</h6>
+          <div class="col-lg-8 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Admin View Students</h6>
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
               <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                 <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
                 <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Student Payments</li>
+                <li class="breadcrumb-item active" aria-current="page">Admin View Students</li>
               </ol>
             </nav>
           </div>
@@ -416,86 +299,6 @@
     </div>
     <!-- Page content -->
     <div class="container-fluid mt--6">
-      <div class="row">
-        <div class="col-xl-12">
-          <div class="card">
-            <div class="card-header border-0">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0">Page visits</h3>
-                </div>
-                <div class="col text-right">
-                  <a href="#!" class="btn btn-sm btn-primary">See all</a>
-                </div>
-              </div>
-            </div>
-            <div class="table-responsive">
-              <!-- Projects table -->
-              <div class="container">
-              <form action="/action_page.php">
-      
-                <div class="row">
-                  <div class="col-50">
-                    <h3>Billing Address</h3>
-                    <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-                    <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
-                    <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                    <input type="text" id="email" name="email" placeholder="john@example.com">
-                    <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-                    <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
-                    <label for="city"><i class="fa fa-institution"></i> City</label>
-                    <input type="text" id="city" name="city" placeholder="New York">
-        
-                    <div class="row">
-                      <div class="col-50">
-                        <label for="state">State</label>
-                        <input type="text" id="state" name="state" placeholder="NY">
-                      </div>
-                      <div class="col-50">
-                        <label for="zip">Zip</label>
-                        <input type="text" id="zip" name="zip" placeholder="10001">
-                      </div>
-                    </div>
-                  </div>
-        
-                  <div class="col-50">
-                    <h3>Payment</h3>
-                    <label for="fname">Accepted Cards</label>
-                    <div class="icon-container">
-                      <i class="fa fa-cc-visa" style="color:navy;"></i>
-                      <i class="fa fa-cc-amex" style="color:blue;"></i>
-                      <i class="fa fa-cc-mastercard" style="color:red;"></i>
-                      <i class="fa fa-cc-discover" style="color:orange;"></i>
-                    </div>
-                    <label for="cname">Name on Card</label>
-                    <input type="text" id="cname" name="cardname" placeholder="John More Doe">
-                    <label for="ccnum">Credit card number</label>
-                    <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-                    <label for="expmonth">Exp Month</label>
-                    <input type="text" id="expmonth" name="expmonth" placeholder="September">
-                    <div class="row">
-                      <div class="col-50">
-                        <label for="expyear">Exp Year</label>
-                        <input type="text" id="expyear" name="expyear" placeholder="2018">
-                      </div>
-                      <div class="col-50">
-                        <label for="cvv">CVV</label>
-                        <input type="text" id="cvv" name="cvv" placeholder="352">
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>
-                <label>
-                  <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
-                </label>
-                <input type="submit" value="Continue to checkout" class="btn1">
-              </form>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="row">
         <div class="col-xl-12">
           <div class="card">
