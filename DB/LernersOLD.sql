@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 05, 2021 at 05:53 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- Host: localhost
+-- Generation Time: Oct 17, 2021 at 01:49 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,28 +18,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `lerners`
+-- Database: `Lerners`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin`
---
-
-CREATE TABLE `admin` (
-  `AID` int(11) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `email` varchar(200) NOT NULL,
-  `UID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`AID`, `name`, `email`, `UID`) VALUES
-(1, 'Admin', 'Admin@gmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -79,19 +59,11 @@ CREATE TABLE `lerners` (
   `name` varchar(100) NOT NULL,
   `reg_no` varchar(100) NOT NULL,
   `owner` varchar(100) NOT NULL,
-  `email` varchar(200) NOT NULL,
   `location` varchar(200) NOT NULL,
   `mobile` int(11) NOT NULL,
   `rating` int(11) NOT NULL,
   `UID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `lerners`
---
-
-INSERT INTO `lerners` (`LID`, `name`, `reg_no`, `owner`, `email`, `location`, `mobile`, `rating`, `UID`) VALUES
-(2, 'Chana', 'df43e', 'Chanakya', 'chanaLearn@gmail.com', 'Kurunagala ', 41445254, 0, 10);
 
 -- --------------------------------------------------------
 
@@ -105,15 +77,6 @@ CREATE TABLE `login` (
   `password` varchar(100) NOT NULL,
   `type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `login`
---
-
-INSERT INTO `login` (`UID`, `username`, `password`, `type`) VALUES
-(1, 'Admin@gmail.com', '$2y$10$cu80N2xc2O4vhiok7Xmml.5icMAwlo/r4bbJ4nSjOD27wtu8lty3.', 1),
-(8, 'kls@gmail.com', '$2y$10$cu80N2xc2O4vhiok7Xmml.5icMAwlo/r4bbJ4nSjOD27wtu8lty3.', 3),
-(10, 'chanaLearn@gmail.com', '$2y$10$cu80N2xc2O4vhiok7Xmml.5icMAwlo/r4bbJ4nSjOD27wtu8lty3.', 2);
 
 -- --------------------------------------------------------
 
@@ -184,10 +147,8 @@ CREATE TABLE `schedule` (
 
 CREATE TABLE `student` (
   `SID` int(11) NOT NULL,
-  `Fname` varchar(100) NOT NULL,
-  `Lname` varchar(200) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `nic` varchar(20) NOT NULL,
-  `email` varchar(200) NOT NULL,
   `mobile` int(10) NOT NULL,
   `address` varchar(200) NOT NULL,
   `age` int(11) NOT NULL,
@@ -195,13 +156,6 @@ CREATE TABLE `student` (
   `gender` char(1) NOT NULL,
   `UID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `student`
---
-
-INSERT INTO `student` (`SID`, `Fname`, `Lname`, `nic`, `email`, `mobile`, `address`, `age`, `dob`, `gender`, `UID`) VALUES
-(1, 'Kusal', 'Lahiru', '123456778', 'kls@gmail.com', 123456789, 'piliyandala', 23, '2021-12-02', 'm', 8);
 
 -- --------------------------------------------------------
 
@@ -231,12 +185,6 @@ CREATE TABLE `student_schedule` (
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD KEY `UID` (`UID`);
 
 --
 -- Indexes for table `exam`
@@ -340,13 +288,13 @@ ALTER TABLE `exam_content`
 -- AUTO_INCREMENT for table `lerners`
 --
 ALTER TABLE `lerners`
-  MODIFY `LID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `LID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `UID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `UID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `package`
@@ -376,7 +324,7 @@ ALTER TABLE `schedule`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `SID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `SID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `student_lerners_package`
@@ -393,12 +341,6 @@ ALTER TABLE `student_schedule`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `admin`
---
-ALTER TABLE `admin`
-  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `login` (`UID`);
 
 --
 -- Constraints for table `exam`
