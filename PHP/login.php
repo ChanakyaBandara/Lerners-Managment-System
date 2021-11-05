@@ -16,7 +16,7 @@
 						exit();
 		}else{
 
-			$sql = "SELECT * FROM login WHERE Email=\"" . $username . "\"";
+			$sql = "SELECT * FROM login WHERE username=\"" . $username . "\"";
 
 			$db = new DbConnect;
 
@@ -40,14 +40,14 @@
 					$Sts;
 
 					foreach ($result as $rows) {
-                        $passveri = $rows['Password'];
-                        $ID = $rows['LID'];
-                        $Sts = $rows['Type'];
+                        $passveri = $rows['password'];
+                        $ID = $rows['UID'];
+                        $Sts = $rows['type'];
                     }
 
 					$pwdcheck = false;
 
-					if ($password == $passveri){
+					if (password_verify($password, $passveri)){
 						$pwdcheck = true;
 					}
 
@@ -64,27 +64,27 @@
 						switch ($status) {
 							case '1':
 
-								$SQLsub = "SELECT `Fname`,`Lname`,`nic`,`photo` FROM `admin` WHERE LID = " . $ID . "";
+								$SQLsub = "SELECT `AID`,`name` FROM `admin` WHERE UID = " . $ID . "";
 								$stmt = $conn->prepare($SQLsub);
 								$stmt->execute();
 
 								if($result = $stmt->fetchAll(PDO::FETCH_ASSOC)){
 
+									$AdmId;
 									$AdmName;
-									$NicNo;
-									$Photo;
+								
 
 									foreach ($result as $rows) {
-	                                     $AdmName = $rows['Fname'];
-										 $NicNo = $rows['nic'];
-										 $Photo = $rows['photo'];
+	                                     $AdmId = $rows['AID'];
+										 $AdmName = $rows['name'];
+									
 				                    }
                                     
                                     echo '<script language="javascript">
-									localStorage.setItem("admname","'.$AdmName.'");
-									localStorage.setItem("nicno","'.$NicNo.'");
-									localStorage.setItem("photo","'.$Photo.'");
-									window.location.href = "../adm_index.html"
+									localStorage.setItem("ID","'.$AdmId.'");
+									localStorage.setItem("uname","'.$AdmName.'");
+							
+									window.location.href = "../admin_index.html"
 									</script>';
 									exit();
                                 }
@@ -93,7 +93,7 @@
 
 							case '2':
 								
-								$SQLsub = "SELECT DID,Fname,Lname,photo FROM `doctor` WHERE LID = " . $ID . "";
+								$SQLsub = "SELECT LID,name FROM `lerners` WHERE UID = " . $ID . "";
 								echo $SQLsub;
 								$stmt = $conn->prepare($SQLsub);
 								$stmt->execute();
@@ -106,23 +106,55 @@
 									$Photo;
 
 									foreach ($result as $rows) {
-										$DID = $rows['DID'];
-                                        $FName = $rows['Fname'];
-										$LName = $rows['Lname'];
-										$Photo = $rows['photo'];
+										$DID = $rows['LID'];
+                                        $FName = $rows['name'];
+									
 				                    }
                                     
                                     echo '<script language="javascript">
                                     localStorage.setItem("did","'.$DID.'");
-									localStorage.setItem("fname","'.$FName.'");
-									localStorage.setItem("lname","'.$LName.'");
-									localStorage.setItem("photo","'.$Photo.'");
-									window.location.href = "../doc_clinic_new.html"
+									localStorage.setItem("uname","'.$FName.'");
+
+									
+									window.location.href = "../learners_index.html"
 									</script>';
 									exit();
                                 }
 								
 								break;
+								case '3':
+								
+									$SQLsub = "SELECT SID,Fname,Lname FROM `student` WHERE UID = " . $ID . "";
+									echo $SQLsub;
+									$stmt = $conn->prepare($SQLsub);
+									$stmt->execute();
+	
+									if($result = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+	
+										$FName;
+										$Lname;
+										$DID;
+										$Photo;
+	
+										foreach ($result as $rows) {
+											$DID = $rows['SID'];
+											$FName = $rows['Fname'];
+											$Lname = $rows['Lname'];
+										
+										}
+										
+										echo '<script language="javascript">
+										localStorage.setItem("did","'.$DID.'");
+										localStorage.setItem("uname","'.$FName.'");
+										localStorage.setItem("Lname","'.$Lname.'");
+	
+										
+										window.location.href = "../learners_index.html"
+										</script>';
+										exit();
+									}
+									
+									break;
 	
 							default:
 								echo'<script language="javascript">
