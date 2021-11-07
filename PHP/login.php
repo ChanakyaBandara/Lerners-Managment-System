@@ -112,7 +112,7 @@
 				                    }
                                     
                                     echo '<script language="javascript">
-                                    localStorage.setItem("did","'.$DID.'");
+                                    localStorage.setItem("lid","'.$DID.'");
 									localStorage.setItem("uname","'.$FName.'");
 
 									
@@ -144,7 +144,7 @@
 										}
 										
 										echo '<script language="javascript">
-										localStorage.setItem("did","'.$DID.'");
+										localStorage.setItem("sid","'.$DID.'");
 										localStorage.setItem("uname","'.$FName.'");
 										localStorage.setItem("Lname","'.$Lname.'");
 	

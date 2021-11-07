@@ -18,8 +18,6 @@
     }
 
 
-
-
 	if(isset($_POST['addLearners'])) {
 		$LearnRegTxtName = $_POST['LearnRegTxtName'];
 		$LearnRegNumRegNo = $_POST['LearnRegNumRegNo'];
@@ -50,4 +48,51 @@
         }
     }
 
+    if(isset($_POST['addPackage'])) {
+		$LerPackTxtName = $_POST['LerPackTxtName'];
+		$LerPackTxtDesc = $_POST['LerPackTxtDesc'];
+        $LerPackDropDur = $_POST['LerPackDropDur'];
+        $LerPackNumCost = $_POST['LerPackNumCost'];
+        $LerPackNumID = $_POST['LerPackNumID']; 
+
+        $db = new DbConnect;
+        $sql = "INSERT INTO `package`(`LID`, `PACKname`, `desciption`, `duration`, `price`) VALUES  ('$LerPackNumID','$LerPackTxtName','$LerPackTxtDesc','$LerPackDropDur','$LerPackNumCost')";
+
+        if(!$conn = $db->connect()){
+            echo "SQL Error";
+            exit();
+        }
+        else {
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            echo '<script language="javascript">
+			alert("Package Added Succesfully !");
+			window.location.href = "../learners_packages.html"
+			</script>';
+			exit();
+        }
+    }
+
+
+    if(isset($_POST['viewPackages'])) {
+		$db = new DbConnect;
+		$conn = $db->connect();
+
+		$stmt = $conn->prepare("SELECT * FROM `package` WHERE LID=".$_POST['viewPackages'].";");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($result);
+	}
+
+    if(isset($_POST['viewProfile'])) {
+		$db = new DbConnect;
+		$conn = $db->connect();
+
+		$stmt = $conn->prepare("SELECT * FROM `lerners` WHERE LID=".$_POST['viewProfile'].";");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($result);
+	}
+
         ?>
+
