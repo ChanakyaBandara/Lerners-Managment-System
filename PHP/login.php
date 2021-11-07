@@ -149,7 +149,7 @@
 										localStorage.setItem("Lname","'.$Lname.'");
 	
 										
-										window.location.href = "../learners_index.html"
+										window.location.href = "../student_index.html"
 										</script>';
 										exit();
 									}

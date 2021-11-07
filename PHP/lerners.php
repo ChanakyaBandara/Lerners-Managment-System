@@ -72,7 +72,42 @@
 			exit();
         }
     }
+    if(isset($_POST['addQuestion'])) {
+		$lerQbnktxtQues = $_POST['lerQbnktxtQues'];
+		$lerQbnktxtAns1 = $_POST['lerQbnktxtAns1'];
+        $lerQbnktxtAns2 = $_POST['lerQbnktxtAns2'];
+        $lerQbnktxtAns3 = $_POST['lerQbnktxtAns3'];
+        $lerQbnktxtAns4 = $_POST['lerQbnktxtAns4']; 
+        $lerQbnktxtCortAns = $_POST['lerQbnktxtCortAns'];
+        $lerQbnktxtID = $_POST['lerQbnktxtID'];  
 
+        $db = new DbConnect;
+        $sql = "INSERT INTO `question_bank`(`content`, `answer_1`, `answer_2`, `answer_3`, `answer_4`, `correct_answer`, `LID`) VALUES  ('$lerQbnktxtQues','$lerQbnktxtAns1','$lerQbnktxtAns2','$lerQbnktxtAns3','$lerQbnktxtAns4','$lerQbnktxtCortAns','$lerQbnktxtID')";
+
+        if(!$conn = $db->connect()){
+            echo "SQL Error";
+            exit();
+        }
+        else {
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            echo '<script language="javascript">
+			alert("Package Added Succesfully !");
+			window.location.href = "../learners_question_book.html"
+			</script>';
+			exit();
+        }
+    }
+
+    if(isset($_POST['viewQuestions'])) {
+		$db = new DbConnect;
+		$conn = $db->connect();
+
+		$stmt = $conn->prepare("SELECT * FROM `question_bank` WHERE LID=".$_POST['viewQuestions'].";");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($result);
+	}
 
     if(isset($_POST['viewPackages'])) {
 		$db = new DbConnect;
@@ -89,6 +124,26 @@
 		$conn = $db->connect();
 
 		$stmt = $conn->prepare("SELECT * FROM `lerners` WHERE LID=".$_POST['viewProfile'].";");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($result);
+	}
+    if(isset($_POST['viewStudents'])) {
+		$db = new DbConnect;
+		$conn = $db->connect();
+
+		$stmt = $conn->prepare("SELECT student.Fname, student.Lname, student.nic, student.email, student.mobile, student.address, student.age, student.dob, student.gender FROM `student`,`student_lerners_package`,`lerners` WHERE student_lerners_package.SID=student.SID AND student_lerners_package.LID=lerners.LID AND  lerners.LID=".$_POST['viewStudents'].";");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($result);
+	}
+
+    
+    if(isset($_POST['viewPayments'])) {
+		$db = new DbConnect;
+		$conn = $db->connect();
+
+		$stmt = $conn->prepare("SELECT student.Fname, student.Lname, package.PACKname, payment.timestamp FROM `payment`,`student`,`lerners`,`package` WHERE payment.LID=lerners.LID AND payment.SID=student.SID AND payment.PACKID=package.PACKID AND lerners.LID=".$_POST['viewPayments'].";");
 		$stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		echo json_encode($result);
