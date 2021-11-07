@@ -92,8 +92,33 @@
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             echo '<script language="javascript">
-			alert("Package Added Succesfully !");
+			alert("Question Added Succesfully !");
 			window.location.href = "../learners_question_book.html"
+			</script>';
+			exit();
+        }
+    }
+    
+    if(isset($_POST['addSchedule'])) {
+		$lernSchedtxtName = $_POST['lernSchedtxtName'];
+		$lernScheddropDay = $_POST['lernScheddropDay'];
+        $lernScheddropDur = $_POST['lernScheddropDur'];
+        $lernSchedtxtID = $_POST['lernSchedtxtID'];
+ 
+
+        $db = new DbConnect;
+        $sql = "INSERT INTO `schedule`(`LID`, `name`, `day`, `duration`) VALUES  ('$lernSchedtxtID','$lernSchedtxtName','$lernScheddropDay','$lernScheddropDur')";
+
+        if(!$conn = $db->connect()){
+            echo "SQL Error";
+            exit();
+        }
+        else {
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            echo '<script language="javascript">
+			alert("Schedule Added Succesfully !");
+			window.location.href = "../learners_schedule.html"
 			</script>';
 			exit();
         }
@@ -146,7 +171,19 @@
 		$stmt = $conn->prepare("SELECT student.Fname, student.Lname, package.PACKname, payment.timestamp FROM `payment`,`student`,`lerners`,`package` WHERE payment.LID=lerners.LID AND payment.SID=student.SID AND payment.PACKID=package.PACKID AND lerners.LID=".$_POST['viewPayments'].";");
 		$stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		echo json_encode($result);
+		
+        echo json_encode($result);
+	}
+
+    if(isset($_POST['viewSchedule'])) {
+		$db = new DbConnect;
+		$conn = $db->connect();
+
+		$stmt = $conn->prepare("SELECT * FROM `schedule` WHERE LID =".$_POST['viewSchedule'].";");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+        echo json_encode($result);
 	}
 
         ?>

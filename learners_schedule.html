@@ -223,22 +223,31 @@
             <div class="table-responsive">
               <!-- Projects table -->
               <div class="container">
-                <form action="/action_page.php">
+                <form action="PHP/lerners.php" method="post">
                   <label for="fname"><b>Name</b></label>
-                  <input type="text" id="fname" name="firstname" placeholder="Schedule Name">
+                  <input type="text" id="lernSchedtxtName" name="lernSchedtxtName" placeholder="Schedule Name">
 
                   <label for="fname"><b>Day</b></label>
-                  <input type="text" id="fname" name="firstname" placeholder="Day">
-              
-                  <label for="country"><b>Duration</b></label>
-                  <select id="country" name="country">
-                    <option value="1 month">1 month</option>
-                    <option value="2 month">2 month</option>
-                    <option value="3 month">3 month</option>
-                    <option value="4 month">4 month</option>
+                  <select id="lernScheddropDay" name="lernScheddropDay">
+                    <option value="Sunday">Sunday</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    
                   </select>
               
-                  <input type="submit" value="Submit">
+                  <label for="country"><b>Duration</b></label>
+                  <select id="lernScheddropDur" name="lernScheddropDur">
+                    <option value="30 minutes">30 minutes</option>
+                    <option value="1 hour">1 hour</option>
+                    <option value="1 hour 30 minutes">1 hour 30 minutes</option>
+                    <option value="2 hours">2 hours</option>
+                  </select>
+                  <input type="text" id="lernSchedtxtID" name="lernSchedtxtID" hidden>
+                  <input type="submit" name="addSchedule">
                 </form>
               </div>
             </div>
@@ -257,7 +266,7 @@
             </div>
             <div class="table-responsive">
               <!-- Projects table -->
-              <table class="table align-items-center table-flush">
+              <table class="table align-items-center table-flush" id="lernersViewScheduleTBL">
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">Page name</th>
@@ -350,8 +359,9 @@
   <!-- Core -->
   <script>
     document.getElementById("uemail").innerHTML = localStorage.getItem("uname");
-    document.getElementById("LerPackNumID").value = localStorage.getItem("lid");
+    document.getElementById("lernSchedtxtID").value = localStorage.getItem("lid");
   </script>
+    <script language="javascript" src="JS/lerners.js"></script>
   <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/js-cookie/js.cookie.js"></script>

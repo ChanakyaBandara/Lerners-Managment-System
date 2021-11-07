@@ -147,6 +147,36 @@ $(document).ready(function () {
     $.ajax({
       url: "PHP/lerners.php",
       method: "post",
+      data: "viewSchedule=" + LeID,
+    }).done(function (result) {
+      console.log(result);
+      result = JSON.parse(result);
+      //console.log(result);
+      $("#lernersViewScheduleTBL").empty();
+      $("#lernersViewScheduleTBL").append(
+        //`ph_ID`, `Ph_name`, `Ph_reg`, `LID`, `location`, `phone`
+        "<thead><th>Name</th><th>Day</th><th>Duration</th></thead>"
+      );
+      result.forEach(function (result) {
+        $("#lernersViewScheduleTBL").append(
+          "<tr><td>" +
+          result.name +
+          "</td><td>" +
+          result.day	+
+          "</td><td>" +
+          result.duration 	+
+          "</td></tr>"
+        );
+      });
+      $("#lernersViewScheduleTBL").append("</tbody>");
+    });
+  });
+
+  $(document).ready(function () {
+  
+    $.ajax({
+      url: "PHP/lerners.php",
+      method: "post",
       data: "viewProfile=" + LeID,
     }).done(function (result) {
       //console.log(result);
