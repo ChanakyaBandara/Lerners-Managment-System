@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2021 at 01:44 PM
+-- Generation Time: Nov 28, 2021 at 08:21 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -80,14 +80,6 @@ CREATE TABLE `feedback` (
   `feedback` varchar(255) NOT NULL,
   `rating` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `feedback`
---
-
-INSERT INTO `feedback` (`FID`, `SID`, `feedback`, `rating`) VALUES
-(1, 1, 'sdfs', 3),
-(2, 1, '22', 5);
 
 -- --------------------------------------------------------
 
@@ -179,8 +171,7 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`PID`, `LID`, `SID`, `PACKID`, `timestamp`) VALUES
-(1, 2, 1, 1, '2021-11-07 06:19:02'),
-(2, 2, 1, 4, '2021-11-28 17:47:03');
+(1, 2, 1, 1, '2021-11-07 06:19:02');
 
 -- --------------------------------------------------------
 
@@ -289,13 +280,6 @@ CREATE TABLE `student_schedule` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `student_schedule`
---
-
-INSERT INTO `student_schedule` (`SSID`, `SID`, `SHID`) VALUES
-(4, 1, 3);
-
---
 -- Indexes for dumped tables
 --
 
@@ -392,8 +376,7 @@ ALTER TABLE `student_lerners_package`
 --
 ALTER TABLE `student_schedule`
   ADD PRIMARY KEY (`SSID`),
-  ADD KEY `SID` (`SID`),
-  ADD KEY `SHID` (`SHID`);
+  ADD KEY `SID` (`SID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -415,7 +398,7 @@ ALTER TABLE `exam_content`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `FID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `FID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `lerners`
@@ -439,7 +422,7 @@ ALTER TABLE `package`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `question_bank`
@@ -469,7 +452,7 @@ ALTER TABLE `student_lerners_package`
 -- AUTO_INCREMENT for table `student_schedule`
 --
 ALTER TABLE `student_schedule`
-  MODIFY `SSID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `SSID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -552,7 +535,7 @@ ALTER TABLE `student_lerners_package`
 --
 ALTER TABLE `student_schedule`
   ADD CONSTRAINT `student_schedule_ibfk_1` FOREIGN KEY (`SID`) REFERENCES `student` (`SID`),
-  ADD CONSTRAINT `student_schedule_ibfk_2` FOREIGN KEY (`SHID`) REFERENCES `schedule` (`SHID`);
+  ADD CONSTRAINT `student_schedule_ibfk_2` FOREIGN KEY (`SSID`) REFERENCES `schedule` (`SHID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

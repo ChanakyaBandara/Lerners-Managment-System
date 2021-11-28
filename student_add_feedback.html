@@ -129,7 +129,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="student_add_feedback.html">
-                <i class="ni ni-single-02 text-red"></i>
+                <i class="ni ni-curved-next text-blue"></i>
                 <span class="nav-link-text">Feedback</span>
               </a>
             </li>
@@ -218,7 +218,7 @@
               <!-- Projects table -->
               <div class="container">
                 <form action="PHP/student.php" method="post">
-                  <label for="subject"><b>Question</b></label>
+                  <label for="subject"><b>Feedback</b></label>
                   <textarea id="studFeedback" name="studFeedback" placeholder="Write Feedback here.." style="height:100px"></textarea>
               
                   <label for="studRating"><b>Rating</b></label>
@@ -229,6 +229,7 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                   </select>
+                  <input type="text" placeholder="s" id="LerPackNumID" name="LerPackNumID" hidden>
                   <input type="submit" name="addFeedback">
                 </form>
               </div>
@@ -249,7 +250,7 @@
             </div>
             <div class="table-responsive">
               <!-- Projects table -->
-              <table class="table align-items-center table-flush">
+              <table class="table align-items-center table-flush" id="studentViewFeedbackTBL">
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">Page name</th>
@@ -343,6 +344,7 @@
   <script>
     document.getElementById("uemail").innerHTML = localStorage.getItem("uname");
     document.getElementById("LerPackNumID").value = localStorage.getItem("sid");
+   
   </script>
   <script language="javascript" src="JS/student.js"></script>
   <script src="assets/vendor/jquery/dist/jquery.min.js"></script>

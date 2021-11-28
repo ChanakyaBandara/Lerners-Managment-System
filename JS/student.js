@@ -58,3 +58,113 @@ $(document).ready(function () {
       $("#studLernProftelPhone").val(result[0].mobile);
     });
   });
+  
+  $(document).ready(function () {
+  
+    $.ajax({
+      url: "PHP/student.php",
+      method: "post",
+      data: "getPackage=" + SID,
+    }).done(function (result) {
+      console.log("result");
+      result = JSON.parse(result);
+      console.log(result);
+      $("#studPackageId").empty();
+      $("#studPackageId").val(result[0].PACKID);
+      $("#studPackageCost").empty();
+      $("#studPackageCost").val(result[0].price);
+      $("#studPackageLid").empty();
+      $("#studPackageLid").val(result[0].LID);
+      
+      
+    });
+  });
+  $(document).ready(function () {
+  
+    $.ajax({
+      url: "PHP/student.php",
+      method: "post",
+      data: "viewFeedBack=" + SID,
+    }).done(function (result) {
+      console.log(result);
+      result = JSON.parse(result);
+      //console.log(result);
+      $("#studentViewFeedbackTBL").empty();
+      $("#studentViewFeedbackTBL").append(
+        //`ph_ID`, `Ph_name`, `Ph_reg`, `LID`, `location`, `phone`
+        "<thead><th>Rating</th><th>Feedback</th></thead>"
+      );
+      result.forEach(function (result) {
+        $("#studentViewFeedbackTBL").append(
+          "<tr><td>" +
+          result.rating +
+          "</td><td>" +
+          result.feedback +
+          "</td></tr>"
+        );
+      });
+      $("#studentViewFeedbackTBL").append("</tbody>");
+    });
+  });
+
+  $(document).ready(function () {
+  
+    $.ajax({
+      url: "PHP/student.php",
+      method: "post",
+      data: "viewPayments=" + SID,
+    }).done(function (result) {
+      console.log(result);
+      result = JSON.parse(result);
+      //console.log(result);
+      $("#studentViewPaymentsTBL").empty();
+      $("#studentViewPaymentsTBL").append(
+        //`ph_ID`, `Ph_name`, `Ph_reg`, `LID`, `location`, `phone`
+        "<thead><th>Time</th><th>Package Name</th><th>Payment</th></thead>"
+      );
+      result.forEach(function (result) {
+        $("#studentViewPaymentsTBL").append(
+          "<tr><td>" +
+          result.timestamp +
+          "</td><td>" +
+          result.PACKname +
+          "</td><td>" +
+          result.price +
+          "</td></tr>"
+        );
+      });
+      $("#studentViewPaymentsTBL").append("</tbody>");
+    });
+  });
+
+  $(document).ready(function () {
+  
+    $.ajax({
+      url: "PHP/student.php",
+      method: "post",
+      data: "viewSchedule=" + SID,
+    }).done(function (result) {
+      console.log(result);
+      result = JSON.parse(result);
+      //console.log(result);
+      $("#studentViewScheduleTBL").empty();
+      $("#studentViewScheduleTBL").append(
+        //`ph_ID`, `Ph_name`, `Ph_reg`, `LID`, `location`, `phone`
+        "<thead><th>Schedule Name</th><th>Days Name</th><th>Duration</th></thead>"
+      );
+      result.forEach(function (result) {
+        $("#studentViewScheduleTBL").append(
+          "<tr><td>" +
+          result.name +
+          "</td><td>" +
+          result.days +
+          "</td><td>" +
+          result.duration +
+          "</td></tr>"
+        );
+      });
+      $("#studentViewScheduleTBL").append("</tbody>");
+    });
+  });
+
+  

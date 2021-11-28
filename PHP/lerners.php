@@ -185,6 +185,16 @@
 		
         echo json_encode($result);
 	}
+    
+    if(isset($_POST['viewFeedBack'])) {
+		$db = new DbConnect;
+		$conn = $db->connect();
+
+		$stmt = $conn->prepare("SELECT * FROM student_lerners_package,feedback WHERE student_lerners_package.SID=feedback.SID AND student_lerners_package.LID=".$_POST['viewFeedBack'].";");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($result);
+	}
 
         ?>
 

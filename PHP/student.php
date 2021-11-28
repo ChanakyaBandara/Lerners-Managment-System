@@ -52,6 +52,57 @@
         }
     }
 
+
+	if(isset($_POST['addFeedback'])) {
+		$LerPackNumID = $_POST['LerPackNumID'];
+		$studFeedback = $_POST['studFeedback'];
+        $studRating = $_POST['studRating'];
+
+
+       
+        $db = new DbConnect;
+        $sql = "INSERT INTO `feedback`( `SID`, `feedback`, `rating`) VALUES  ('$LerPackNumID','$studFeedback','$studRating')";
+
+        if(!$conn = $db->connect()){
+            echo "SQL Error";
+            exit();
+        }
+        else {
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            echo '<script language="javascript">
+			alert("Feedback Submited Succesfully!");
+			window.location.href = "../student_add_feedback.html"
+			</script>';
+			exit();
+        }
+    }
+    
+    if(isset($_POST['addPayment'])) {
+		$studPackageLid = $_POST['studPackageLid'];
+		$studentID = $_POST['studentID'];
+        $studPackageId = $_POST['studPackageId'];
+
+        $db = new DbConnect;
+        $sql = "INSERT INTO `payment`(`LID`, `SID`, `PACKID`) VALUES  ('$studPackageLid','$studentID','$studPackageId')";
+
+        if(!$conn = $db->connect()){
+            echo "SQL Error";
+            exit();
+        }
+        else {
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            echo '<script language="javascript">
+			alert("Payment Complete Succesfully!");
+			window.location.href = "../student_payment.html"
+			</script>';
+			exit();
+        }
+    }
+    
+    
+
     if(isset($_POST['viewProfile'])) {
 		$db = new DbConnect;
 		$conn = $db->connect();
@@ -67,6 +118,43 @@
 		$conn = $db->connect();
 
 		$stmt = $conn->prepare("SELECT lerners.name, lerners.reg_no, lerners.owner, lerners.email, lerners.location, lerners.mobile, lerners.rating FROM `lerners`,`student_lerners_package`,`student` WHERE  student_lerners_package.SID=student.SID AND student_lerners_package.LID=lerners.LID AND student.SID=".$_POST['viewLernProfile'].";");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($result);
+	}
+    if(isset($_POST['viewFeedBack'])) {
+		$db = new DbConnect;
+		$conn = $db->connect();
+
+		$stmt = $conn->prepare("SELECT * FROM `feedback` WHERE SID=".$_POST['viewFeedBack'].";");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($result);
+	}
+    if(isset($_POST['getPackage'])) {
+		$db = new DbConnect;
+		$conn = $db->connect();
+
+		$stmt = $conn->prepare("SELECT * FROM package,student_lerners_package WHERE student_lerners_package.PACKID=package.PACKID AND student_lerners_package.SID=".$_POST['getPackage'].";");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($result);
+	}
+
+    if(isset($_POST['viewPayments'])) {
+		$db = new DbConnect;
+		$conn = $db->connect();
+
+		$stmt = $conn->prepare("SELECT * FROM payment,package WHERE payment.PACKID=package.PACKID AND payment.SID=".$_POST['viewPayments'].";");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($result);
+	}
+    if(isset($_POST['viewSchedule'])) {
+		$db = new DbConnect;
+		$conn = $db->connect();
+
+		$stmt = $conn->prepare("SELECT * FROM student_schedule,schedule WHERE student_schedule.SHID=schedule.SHID AND student_schedule.SID=".$_POST['viewSchedule'].";");
 		$stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		echo json_encode($result);

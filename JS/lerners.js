@@ -198,3 +198,31 @@ $(document).ready(function () {
       $("#lernProftelPhone").val(result[0].mobile);
     });
   });
+
+  $(document).ready(function () {
+  
+    $.ajax({
+      url: "PHP/lerners.php",
+      method: "post",
+      data: "viewFeedBack=" + LeID,
+    }).done(function (result) {
+      console.log(result);
+      result = JSON.parse(result);
+      console.log(result);
+      $("#lernersViewFeedbackTBL").empty();
+      $("#lernersViewFeedbackTBL").append(
+        //`ph_ID`, `Ph_name`, `Ph_reg`, `LID`, `location`, `phone`
+        "<thead><th>Rating</th><th>Feedback</th></thead>"
+      );
+      result.forEach(function (result) {
+        $("#lernersViewFeedbackTBL").append(
+          "<tr><td>" +
+          result.rating +
+          "</td><td>" +
+          result.feedback +
+          "</td></tr>"
+        );
+      });
+      $("#lernersViewFeedbackTBL").append("</tbody>");
+    });
+  });
