@@ -160,4 +160,12 @@
 		echo json_encode($result);
 	}
 
-        ?>
+    if(isset($_POST['getQuestions'])) {
+		$db = new DbConnect;
+		$conn = $db->connect();
+
+		$stmt = $conn->prepare("SELECT * FROM `question_bank` ORDER BY RAND() LIMIT 20;");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($result);
+	}
