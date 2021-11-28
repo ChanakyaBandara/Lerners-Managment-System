@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2021 at 08:21 AM
+-- Generation Time: Nov 05, 2021 at 05:53 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -71,19 +71,6 @@ CREATE TABLE `exam_content` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `feedback`
---
-
-CREATE TABLE `feedback` (
-  `FID` int(11) NOT NULL,
-  `SID` int(11) NOT NULL,
-  `feedback` varchar(255) NOT NULL,
-  `rating` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `lerners`
 --
 
@@ -104,7 +91,7 @@ CREATE TABLE `lerners` (
 --
 
 INSERT INTO `lerners` (`LID`, `name`, `reg_no`, `owner`, `email`, `location`, `mobile`, `rating`, `UID`) VALUES
-(2, 'Learn From Chana', 'df43e', 'Chanakya', 'chanalearn@gmail.com', 'Kurunagala ', 41445254, 0, 10);
+(2, 'Chana', 'df43e', 'Chanakya', 'chanaLearn@gmail.com', 'Kurunagala ', 41445254, 0, 10);
 
 -- --------------------------------------------------------
 
@@ -137,20 +124,11 @@ INSERT INTO `login` (`UID`, `username`, `password`, `type`) VALUES
 CREATE TABLE `package` (
   `PACKID` int(11) NOT NULL,
   `LID` int(11) NOT NULL,
-  `PACKname` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `desciption` varchar(255) NOT NULL,
   `duration` varchar(100) NOT NULL,
   `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `package`
---
-
-INSERT INTO `package` (`PACKID`, `LID`, `PACKname`, `desciption`, `duration`, `price`) VALUES
-(1, 2, 'Long Learn', 'Long time to learn', '6 years', 25000),
-(3, 2, 'Fast 5', 'Learn in 1 month', '1 month', 25000),
-(4, 2, 'Crash Cose', 'Learn How to crash', '3 month', 100);
 
 -- --------------------------------------------------------
 
@@ -163,15 +141,9 @@ CREATE TABLE `payment` (
   `LID` int(11) NOT NULL,
   `SID` int(11) NOT NULL,
   `PACKID` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
   `timestamp` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `payment`
---
-
-INSERT INTO `payment` (`PID`, `LID`, `SID`, `PACKID`, `timestamp`) VALUES
-(1, 2, 1, 1, '2021-11-07 06:19:02');
 
 -- --------------------------------------------------------
 
@@ -190,14 +162,6 @@ CREATE TABLE `question_bank` (
   `LID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `question_bank`
---
-
-INSERT INTO `question_bank` (`QID`, `content`, `answer_1`, `answer_2`, `answer_3`, `answer_4`, `correct_answer`, `LID`) VALUES
-(1, 'Go Straight', 'ok', 'NO', 'wait', 'close', 2, 2),
-(2, 'jhj', '2', '3', '4', '4', 3, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -207,18 +171,10 @@ INSERT INTO `question_bank` (`QID`, `content`, `answer_1`, `answer_2`, `answer_3
 CREATE TABLE `schedule` (
   `SHID` int(11) NOT NULL,
   `LID` int(11) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `day` varchar(200) NOT NULL,
-  `duration` varchar(200) NOT NULL
+  `name` int(11) NOT NULL,
+  `day` int(11) NOT NULL,
+  `duration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `schedule`
---
-
-INSERT INTO `schedule` (`SHID`, `LID`, `name`, `day`, `duration`) VALUES
-(3, 2, 'daily', 'Tuesday', '1 hour 30 minutes'),
-(4, 2, 'gtest', 'Wednesday', '1 hour');
 
 -- --------------------------------------------------------
 
@@ -260,13 +216,6 @@ CREATE TABLE `student_lerners_package` (
   `PACKID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `student_lerners_package`
---
-
-INSERT INTO `student_lerners_package` (`SLPID`, `SID`, `LID`, `PACKID`) VALUES
-(1, 1, 2, 4);
-
 -- --------------------------------------------------------
 
 --
@@ -304,13 +253,6 @@ ALTER TABLE `exam_content`
   ADD PRIMARY KEY (`EQID`),
   ADD UNIQUE KEY `EID` (`EID`,`QID`),
   ADD KEY `QID` (`QID`);
-
---
--- Indexes for table `feedback`
---
-ALTER TABLE `feedback`
-  ADD PRIMARY KEY (`FID`),
-  ADD KEY `SID` (`SID`);
 
 --
 -- Indexes for table `lerners`
@@ -395,12 +337,6 @@ ALTER TABLE `exam_content`
   MODIFY `EQID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `feedback`
---
-ALTER TABLE `feedback`
-  MODIFY `FID` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `lerners`
 --
 ALTER TABLE `lerners`
@@ -416,25 +352,25 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `package`
 --
 ALTER TABLE `package`
-  MODIFY `PACKID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `PACKID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `question_bank`
 --
 ALTER TABLE `question_bank`
-  MODIFY `QID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `QID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `SHID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `SHID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `student`
@@ -446,7 +382,7 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `student_lerners_package`
 --
 ALTER TABLE `student_lerners_package`
-  MODIFY `SLPID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `SLPID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `student_schedule`
@@ -477,12 +413,6 @@ ALTER TABLE `exam`
 ALTER TABLE `exam_content`
   ADD CONSTRAINT `exam_content_ibfk_1` FOREIGN KEY (`EID`) REFERENCES `exam` (`EID`),
   ADD CONSTRAINT `exam_content_ibfk_2` FOREIGN KEY (`QID`) REFERENCES `question_bank` (`QID`);
-
---
--- Constraints for table `feedback`
---
-ALTER TABLE `feedback`
-  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`SID`) REFERENCES `student` (`SID`);
 
 --
 -- Constraints for table `lerners`
