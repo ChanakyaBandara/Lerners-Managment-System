@@ -21,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Student's Learners</title>
+  <title>Student Profile</title>
   <!-- Favicon -->
   <link rel="icon" href="assets/img/brand/favicon.png" type="image/png">
   <!-- Fonts -->
@@ -35,13 +35,45 @@
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <style>
-    input[type="text"]:disabled {
-      background: transparent;
-      color: black;
-      border: 0;
-      font-size: larger;
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
+    
+    input[type=text], select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
     }
-  </style>
+    
+    input[type=submit] {
+      background-color: #04AA6D;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+    
+    .container {
+      border-radius: 5px;
+      background-color: #ffffff;
+      padding: 20px;
+    }
+    input[type="text"]:disabled {
+     background: transparent;
+     color: black;
+     border: 0;
+     font-size: larger;
+}
+    </style>
 </head>
 
 <body>
@@ -58,7 +90,7 @@
         <!-- Collapse -->
         <div class="collapse navbar-collapse" id="sidenav-collapse-main">
           <!-- Nav items -->
-          <ul class="navbar-nav">
+          <ul class="navbar-nav"> 
             <li class="nav-item">
               <a class="nav-link" href="student_index.html">
                 <i class="ni ni-tv-2 text-primary"></i>
@@ -90,20 +122,20 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="student_learners.html">
+              <a class="nav-link" href="student_learners.html">
                 <i class="ni ni-single-02 text-red"></i>
                 <span class="nav-link-text">Learner's Profile</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="student_add_feedback.html">
+              <a class="nav-link active" href="student_add_feedback.html">
                 <i class="ni ni-single-02 text-red"></i>
                 <span class="nav-link-text">Feedback</span>
               </a>
             </li>
           </ul>
           <!-- Divider -->
-        </div>
+          </div>
       </div>
     </div>
   </nav>
@@ -115,12 +147,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
           <div class="col-lg-6 col-7">
-            <h6 class="h2 text-white d-inline-block mb-0">Student's Learners</h6>
+            <h6 class="h2 text-white d-inline-block mb-0">Student Profile</h6>
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
               <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                 <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
                 <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Student's Learners</li>
+                <li class="breadcrumb-item active" aria-current="page">Student Profile</li>
               </ol>
             </nav>
           </div>
@@ -128,8 +160,7 @@
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item d-xl-none">
               <!-- Sidenav toggler -->
-              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
-                data-target="#sidenav-main">
+              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
                 <div class="sidenav-toggler-inner">
                   <i class="sidenav-toggler-line"></i>
                   <i class="sidenav-toggler-line"></i>
@@ -141,12 +172,11 @@
               <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
                 <i class="ni ni-zoom-split-in"></i>
               </a>
-            </li>
+            </li> 
           </ul>
           <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
             <li class="nav-item dropdown">
-              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
                     <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
@@ -156,9 +186,9 @@
                   </div>
                 </div>
               </a>
-              <div class="dropdown-menu  dropdown-menu-right ">
+              <div class="dropdown-menu  dropdown-menu-right "> 
                 <a href="PHP/logout.php" class="dropdown-item">
-                  <i class="ni ni-button-power"></i>
+                   <i class="ni ni-button-power"></i>
                   <span>Logout</span>
                 </a>
               </div>
@@ -170,100 +200,149 @@
     <!-- Header -->
     <!-- Header -->
     <div class="header bg-primary pb-6">
-
+       
     </div>
     <!-- Page content -->
     <div class="container-fluid mt--6">
       <div class="row">
-        <div class="col-xl-12 order-xl-1">
+        <div class="col-xl-12">
           <div class="card">
-            <div class="card-header">
+            <div class="card-header border-0">
               <div class="row align-items-center">
-                <div class="col-8">
-                  <h3 class="mb-0">Learner's profile </h3>
-                </div>
+                <div class="col">
+                  <h3 class="mb-0">Add Feedback</h3>
+                </div> 
               </div>
             </div>
-            <div class="card-body">
-              <form>
-                <h6 class="heading-small text-muted mb-4">Learner's information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">Learner's name</label>
-                        <input type="text" id="studLernProftxtName" name="studLernProftxtName" class="form-control"
-                          placeholder="Learner's name..." disabled>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-last-name">Registration Number</label>
-                        <input type="text" id="studLernProftxtRegNo" name="studLernProftxtRegNo" class="form-control"
-                          placeholder="Registration Number..." disabled>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-username">Owner's name</label>
-                        <input type="text" id="studLernProftxtOname" name="studLernProftxtOname" class="form-control"
-                          placeholder="Owner's name..." disabled>
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="text" id="studLernProfEmailEmail" name="studLernProfEmailEmail"
-                          class="form-control" placeholder="jesse@example.com" disabled>
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-email">Rating</label>
-                        <input type="text" id="studLernProfNumRating" name="studLernProfNumRating" class="form-control"
-                          placeholder="jesse@example.com" disabled>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Address -->
-                <h6 class="heading-small text-muted mb-4">Contact information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-address">Address</label>
-                        <input id="studLernProftxtAddress" name="studLernProftxtAddress" class="form-control"
-                          placeholder="Home Address..." type="text" disabled>
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-city">Mobile Number</label>
-                        <input type="text" id="studLernProftelPhone" name="studLernProftelPhone" class="form-control"
-                          placeholder="Add your mobile number..." disabled>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Description -->
-              </form>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <div class="container">
+                <form action="PHP/student.php" method="post">
+                  <label for="subject"><b>Question</b></label>
+                  <textarea id="studFeedback" name="studFeedback" placeholder="Write Feedback here.." style="height:100px"></textarea>
+              
+                  <label for="studRating"><b>Rating</b></label>
+                  <select id="studRating" name="studRating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                  <input type="submit" name="addFeedback">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Previous Feedbacks</h3>
+                </div> 
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Page name</th>
+                    <th scope="col">Visitors</th>
+                    <th scope="col">Unique users</th>
+                    <th scope="col">Bounce rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      /argon/
+                    </th>
+                    <td>
+                      4,569
+                    </td>
+                    <td>
+                      340
+                    </td>
+                    <td>
+                      <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      /argon/index.html
+                    </th>
+                    <td>
+                      3,985
+                    </td>
+                    <td>
+                      319
+                    </td>
+                    <td>
+                      <i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      /argon/charts.html
+                    </th>
+                    <td>
+                      3,513
+                    </td>
+                    <td>
+                      294
+                    </td>
+                    <td>
+                      <i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      /argon/tables.html
+                    </th>
+                    <td>
+                      2,050
+                    </td>
+                    <td>
+                      147
+                    </td>
+                    <td>
+                      <i class="fas fa-arrow-up text-success mr-3"></i> 50,87%
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      /argon/profile.html
+                    </th>
+                    <td>
+                      1,795
+                    </td>
+                    <td>
+                      190
+                    </td>
+                    <td>
+                      <i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
       <!-- Footer -->
-    </div>
+      </div>
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->
   <script>
     document.getElementById("uemail").innerHTML = localStorage.getItem("uname");
-    //document.getElementById("LerPackNumID").value = localStorage.getItem("sid");
+    document.getElementById("LerPackNumID").value = localStorage.getItem("sid");
   </script>
   <script language="javascript" src="JS/student.js"></script>
   <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
