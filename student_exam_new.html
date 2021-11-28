@@ -263,6 +263,25 @@
   <script>
     document.getElementById("uemail").innerHTML = localStorage.getItem("uname");
     document.getElementById("LerPackNumID").value = localStorage.getItem("sid");
+
+
+    let resultQuestions;
+
+    $(document).ready(function () {
+
+      $.ajax({
+        url: "PHP/student.php",
+        method: "post",
+        data: "getQuestions=" + SID,
+      }).done(function (result) {
+        console.log("result");
+        resultQuestions = JSON.parse(result);
+        console.log(resultQuestions);
+      });
+
+
+    });
+
   </script>
   <script language="javascript" src="JS/student.js"></script>
   <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
