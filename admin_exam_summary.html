@@ -154,7 +154,8 @@
     <div class="container-fluid mt--6">
       <div class="row">
         <div class="col-xl-12">
-          <div class="card">
+          <button class="btn btn-sm btn-light" onclick="downloadPDF()">Download</button>
+          <div class="card" id="content">
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
@@ -257,6 +258,25 @@
   <!-- Core -->
   <script>
     document.getElementById("uemail").innerHTML = localStorage.getItem("uname");
+
+    function downloadPDF() {
+      document.getElementById('content').style.display = 'block';
+
+      const invoice = this.document.getElementById("content");
+      const internalTable = invoice.getInnerHTML();
+      const d = new Date();
+      const template = "<div style='margin-bottom: 25px'; class><img src='assets/img/brand/blue.png' alt='logo' width='200px'/></div>" + internalTable + "<p>" + d + "</p>";
+      console.log(invoice)
+      console.log(window)
+      var opt = {
+        margin: 1,
+        filename: 'Exam Summary.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().from(template).set(opt).save();
+    }
   </script>
   <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
