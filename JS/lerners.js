@@ -226,3 +226,35 @@ $(document).ready(function () {
       $("#lernersViewFeedbackTBL").append("</tbody>");
     });
   });
+
+  $(document).ready(function () {
+  
+    $.ajax({
+      url: "PHP/lerners.php",
+      method: "post",
+      data: "viewExamResults=" + LeID,
+    }).done(function (result) {
+      console.log(result);
+      result = JSON.parse(result);
+      //console.log(result);
+      $("#lernersViewExamResultsTBL").empty();
+      $("#lernersViewExamResultsTBL").append(
+        //`ph_ID`, `Ph_name`, `Ph_reg`, `LID`, `location`, `phone`
+        "<thead><th>Exam</th><th>Student Name</th>><th>Result</th>><th>Time</th></thead>"
+      );
+      result.forEach(function (result) {
+        $("#lernersViewExamResultsTBL").append(
+          "<tr><td>" +
+          result.EID +
+          "</td><td>" +
+          result.Fname +" "+result.Lname +
+          "</td><td>" +
+          result.result +
+          "</td><td>" +
+          result.timestamp +
+          "</td></tr>"
+        );
+      });
+      $("#lernersViewExamResultsTBL").append("</tbody>");
+    });
+  });
