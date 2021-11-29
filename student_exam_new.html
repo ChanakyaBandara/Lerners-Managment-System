@@ -359,8 +359,8 @@
     function saveExam(){
       examObj = {
         SID,
-        Result:10,
-        Content : [[1,4],[2,3]]
+        Result:8,
+        Content : [[1,1],[2,1]]
       }
       console.log(examObj)
       const examJSON = JSON.stringify(examObj);
@@ -371,7 +371,7 @@
         method: "post",
         data: "saveExam=" + examJSON
       }).done(function (result) {
-        console.log("result");
+        console.log(result);
       });
     }
 

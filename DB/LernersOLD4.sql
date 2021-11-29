@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2021 at 03:43 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Generation Time: Nov 28, 2021 at 01:44 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -50,19 +49,11 @@ INSERT INTO `admin` (`AID`, `name`, `email`, `UID`) VALUES
 
 CREATE TABLE `exam` (
   `EID` int(11) NOT NULL,
+  `LID` int(11) NOT NULL,
   `SID` int(11) NOT NULL,
   `result` int(11) NOT NULL,
-  `timestamp` datetime NOT NULL DEFAULT current_timestamp()
+  `timestamp` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `exam`
---
-
-INSERT INTO `exam` (`EID`, `SID`, `result`, `timestamp`) VALUES
-(4, 1, 11, '0000-00-00 00:00:00'),
-(5, 1, 11, '2021-11-29 08:06:35'),
-(6, 1, 8, '2021-11-29 08:12:40');
 
 -- --------------------------------------------------------
 
@@ -76,16 +67,6 @@ CREATE TABLE `exam_content` (
   `QID` int(11) NOT NULL,
   `answer` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `exam_content`
---
-
-INSERT INTO `exam_content` (`EQID`, `EID`, `QID`, `answer`) VALUES
-(1, 5, 1, 4),
-(2, 5, 2, 3),
-(3, 6, 1, 1),
-(4, 6, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -329,6 +310,7 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `exam`
   ADD PRIMARY KEY (`EID`),
+  ADD KEY `LID` (`LID`),
   ADD KEY `SID` (`SID`);
 
 --
@@ -421,13 +403,13 @@ ALTER TABLE `student_schedule`
 -- AUTO_INCREMENT for table `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `EID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `EID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `exam_content`
 --
 ALTER TABLE `exam_content`
-  MODIFY `EQID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `EQID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -503,6 +485,7 @@ ALTER TABLE `admin`
 -- Constraints for table `exam`
 --
 ALTER TABLE `exam`
+  ADD CONSTRAINT `exam_ibfk_1` FOREIGN KEY (`LID`) REFERENCES `lerners` (`LID`),
   ADD CONSTRAINT `exam_ibfk_2` FOREIGN KEY (`SID`) REFERENCES `student` (`SID`);
 
 --

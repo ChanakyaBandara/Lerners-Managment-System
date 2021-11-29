@@ -17,9 +17,6 @@
         }
     }
 
-
-
-
 	if(isset($_POST['addStudent'])) {
 		$studRegTxtFname = $_POST['studRegTxtFname'];
 		$studRegTxtLname = $_POST['studRegTxtLname'];
@@ -171,22 +168,26 @@
 	}
 
     if(isset($_POST['saveExam'])) {
-		//$examObj = json_decode($_POST['saveExam']);
-		//".$obj->SID.",".$obj->Result."
+		$examObj = json_decode($_POST['saveExam']);
+		
+		$contentSql="INSERT INTO `exam_content`(`EID`, `QID`, `answer`) VALUES ";
+		$ContentArry = $examObj->Content;
+		
 		$db = new DbConnect;
-        $sql = "INSERT INTO `exam`(`SID`, `result`) VALUES (1,10);";
-
+        $sql = "INSERT INTO `exam`(`SID`, `result`) VALUES (".$examObj->SID.",".$examObj->Result.");";
         if(!$conn = $db->connect()){
             echo "SQL Error";
             exit();
         }
         else {
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            echo '<script language="javascript">
-			alert("Exam Succesfully!");
-			window.location.href = "../student_exam_new.html"
-			</script>';
+            $conn->exec($sql);
+  			$last_id = $conn->lastInsertId();
+			foreach ($ContentArry as $contentValue) {
+			$contentSql .= "(".$last_id.",".$contentValue[0].",".$contentValue[1]."),";
+			}
+			$contentSql = substr_replace($contentSql,";",-1);
+			$conn->exec($contentSql);
+            echo "{result:1}";
 			exit();
         }
 	}
