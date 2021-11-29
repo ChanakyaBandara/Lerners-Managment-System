@@ -180,7 +180,7 @@ $(document).ready(function () {
     );
     result.forEach(function (result) {
       $("#studentViewExamResultsTBL").append(
-        "<tr><td>" +
+        "<tr ><td>" +
         result.EID +
         "</td><td>" +
         result.result +

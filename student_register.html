@@ -27,8 +27,10 @@
   <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
-  <style>    
-    input[type=text], select, textarea {
+  <style>
+    input[type=text],
+    select,
+    textarea {
       width: 100%;
       padding: 12px;
       border: 1px solid #ccc;
@@ -38,7 +40,7 @@
       margin-bottom: 16px;
       resize: vertical;
     }
-    
+
     input[type=submit] {
       background-color: #04AA6D;
       color: white;
@@ -47,11 +49,12 @@
       border-radius: 4px;
       cursor: pointer;
     }
-    
+
     input[type=submit]:hover {
       background-color: #45a049;
     }
-    </style>
+  </style>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 
 <body class="bg-default">
@@ -61,7 +64,8 @@
       <a class="navbar-brand" href="landing_page.html">
         <img src="assets/img/brand/white.png">
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
+        aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
@@ -73,7 +77,8 @@
               </a>
             </div>
             <div class="col-6 collapse-close">
-              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse"
+                aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
               </button>
@@ -106,7 +111,8 @@
     <!-- Header -->
     <div class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9">
       <div class="separator separator-bottom separator-skew zindex-100">
-        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+          xmlns="http://www.w3.org/2000/svg">
           <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
         </svg>
       </div>
@@ -126,37 +132,41 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">First name</label>
-                        <input type="text"  class="form-control"  id="studRegTxtFname" name="studRegTxtFname" placeholder="First Name...">
+                        <input type="text" class="form-control" id="studRegTxtFname" name="studRegTxtFname"
+                          placeholder="First Name...">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-last-name" >Last name</label>
-                        <input type="text"  class="form-control" id="studRegTxtLname" name="studRegTxtLname" placeholder="Last Name...">
+                        <label class="form-control-label" for="input-last-name">Last name</label>
+                        <input type="text" class="form-control" id="studRegTxtLname" name="studRegTxtLname"
+                          placeholder="Last Name...">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-4">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-username" >NIC</label>
-                        <input type="text"  class="form-control" id="studRegTxtNIC" name="studRegTxtNIC"  placeholder="12345678v">
+                        <label class="form-control-label" for="input-username">NIC</label>
+                        <input type="text" class="form-control" id="studRegTxtNIC" name="studRegTxtNIC"
+                          placeholder="12345678v">
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-email"  >Email address</label>
-                        <input type="email"  class="form-control" id="studRegTxtEmail" name="studRegTxtEmail" placeholder="jesse@example.com">
+                        <label class="form-control-label" for="input-email">Email address</label>
+                        <input type="email" class="form-control" id="studRegTxtEmail" name="studRegTxtEmail"
+                          placeholder="jesse@example.com">
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label for="country">Gender</label>
-                  <select   id="studRegSelGender" name="studRegSelGender">
-                    <option value="0" selected>Select Gender ...</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
+                        <select id="studRegSelGender" name="studRegSelGender">
+                          <option value="0" selected>Select Gender ...</option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -169,7 +179,8 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="form-control-label" for="input-address">Address</label>
-                        <input  class="form-control" id="studRegTxtAddress" name="studRegTxtAddress" placeholder="Home Address..." type="text">
+                        <input class="form-control" id="studRegTxtAddress" name="studRegTxtAddress"
+                          placeholder="Home Address..." type="text">
                       </div>
                     </div>
                   </div>
@@ -177,32 +188,40 @@
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label class="form-control-label" for="input-city">Mobile Number</label>
-                        <input type="tel"  class="form-control" id="studRegTelPhone"  name="studRegTelPhone" placeholder="Add your mobile number...">
+                        <input type="tel" class="form-control" id="studRegTelPhone" name="studRegTelPhone"
+                          placeholder="Add your mobile number...">
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label class="form-control-label" for="input-country">Age</label>
-                        <input type="number" class="form-control" id="studRegNumAge" name="studRegNumAge" placeholder="Age...">
+                        <input type="number" class="form-control" id="studRegNumAge" name="studRegNumAge"
+                          placeholder="Age...">
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label class="form-control-label" for="input-country">Date of Birth</label>
-                        <input type="date"  class="form-control" id="studRegDateBirth" name="studRegDateBirth" placeholder="DOB">
+                        <input type="date" class="form-control" id="studRegDateBirth" name="studRegDateBirth"
+                          placeholder="DOB">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="nav-item">
                         <button type="submit" name="addStudent" class="btn btn-primary my-4">Register</button>
-                        
+
                       </div>
                     </div>
                   </div>
                 </div>
+                
                 <hr class="my-4" />
+                <!-- Address -->
+                <h6 class="heading-small text-muted mb-4">Select Lerners</h6>
+                <Table  class="table align-items-center table-flush" id="lernersListTBL">
+                </Table>
                 <!-- Description -->
-                </form>
+              </form>
             </div>
           </div>
         </div>
@@ -212,10 +231,7 @@
   <!-- Footer -->
   <!-- Argon Scripts -->
   <!-- Core -->
-  <script>
-    document.getElementById("uemail").innerHTML = localStorage.getItem("uname");
-    document.getElementById("LerPackNumID").value = localStorage.getItem("sid");
-  </script>
+  <script language="javascript" src="JS/admin.js"></script>
   <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/js-cookie/js.cookie.js"></script>
