@@ -113,3 +113,38 @@ $(document).ready(function () {
       $("#adminViewPaymentsTBL").append("</tbody>");
     });
   });
+
+
+  $(document).ready(function () {
+  
+    $.ajax({
+      url: "PHP/admin.php",
+      method: "post",
+      data: "viewExamResults=" + 5,
+    }).done(function (result) {
+      console.log(result);
+      result = JSON.parse(result);
+      //console.log(result);
+      $("#adminViewExamResultsTBL").empty();
+      $("#adminViewExamResultsTBL").append(
+        //`ph_ID`, `Ph_name`, `Ph_reg`, `LID`, `location`, `phone`
+        "<thead><th>Exam</th><th>Learners Name</th><th>Student Name</th>><th>Result</th>><th>Time</th></thead>"
+      );
+      result.forEach(function (result) {
+        $("#adminViewExamResultsTBL").append(
+          "<tr><td>" +
+          result.EID +
+          "</td><td>" +
+          result.name	 +
+          "</td><td>" +
+          result.Fname +" "+result.Lname +
+          "</td><td>" +
+          result.result +
+          "</td><td>" +
+          result.timestamp +
+          "</td></tr>"
+        );
+      });
+      $("#adminViewExamResultsTBL").append("</tbody>");
+    });
+  });
