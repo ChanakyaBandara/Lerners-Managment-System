@@ -228,11 +228,25 @@
                 <div class="col">
                   <h3 class="mb-0">Exam</h3>
                 </div>
-                <div class="col">
-                  <h3 class="mb-0" id="questionNumber"><span id="questionNumberLable">0/20</span></h3>
+                <div class="col" style="background-color: #0b7fab; padding-top: 20px; padding-bottom: 20px ;border-radius: 10px; text-align: center; margin: 10px;">
+                  <h4 class="mb-0" style="color: #ffffff;">Question Number</h4>
+                  <h3 class="mb-0" id="questionNumber" style="color: #ffffff;"><span id="questionNumberLable">0/20</span></h3>
+                </div>
+                <div class="col" style="background-color: #038aff; padding-top: 20px; padding-bottom: 20px ;border-radius: 10px; text-align: center; margin: 10px;">
+                  <h4 class="mb-0" style="color: #ffffff;">Remaining Time</h4>
+                  <h3 class="mb-0" id="questionTimer" style="color: #ffffff;"><span id="time">30:00</span></h3>
                 </div>
                 <div class="col">
-                  <h3 class="mb-0" id="questionTimer"><span id="time">30:00</span></h3>
+                  <h3 class="mb-0"><span></span></h3>
+                </div>
+                <div class="col">
+                  <h3 class="mb-0"><span></span></h3>
+                </div>
+                <div class="col">
+                  <h3 class="mb-0"><span></span></h3>
+                </div>
+                <div class="col">
+                  <h3 class="mb-0"><span></span></h3>
                 </div>
               </div>
             </div>
@@ -252,10 +266,10 @@
                   <label for="answer3" id="labelanswer3">3</label><br>
                   <input type="radio" id="answer4" name="answer" value="4">
                   <label for="answer4" id="labelanswer4">4</label><br>
-                  <button class="btn bg-success" type="button" id="onoff" value="Off" onclick="playBtnClick()">Start</button>
-                  <button class="btn bg-warning" type="button" onclick="prvBtnClick()">Previous</button>
-                  <button class="btn bg-success" type="button" onclick="nextBtnClick()">Next</button>
-                  <button class="btn bg-danger" type="button" onclick="saveExam()">Finish</button>
+                  <button class="btn" type="button" id="onoff" value="Off" onclick="playBtnClick()" style="color: #ffffff; background-color: #0b7fab;">Start</button>
+                  <button class="btn" type="button" onclick="prvBtnClick()" style="color: #ffffff; background-color: #323278;">Previous</button>
+                  <button class="btn" type="button" onclick="nextBtnClick()" style="color: #ffffff; background-color: #323278;">Next</button>
+                  <button class="btn" type="button" onclick="saveExam()" style="color: #ffffff; background-color: #848ccf">Finish</button>
                 </form>
               </div>
             </div>
