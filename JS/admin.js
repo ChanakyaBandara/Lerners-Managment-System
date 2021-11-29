@@ -70,7 +70,7 @@ $(document).ready(function () {
           "</td><td>" +
           result.dob +
           "</td><td>" +
-          result.gender +
+          maleFemale(result.gender) +
           "</td></tr>"
         );
       });
@@ -148,3 +148,11 @@ $(document).ready(function () {
       $("#adminViewExamResultsTBL").append("</tbody>");
     });
   });
+
+  function maleFemale(str) {
+    if (str === "m") {
+      return "Male"
+    } else {
+      return "Female"
+    }
+  }

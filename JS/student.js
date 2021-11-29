@@ -91,7 +91,6 @@ $(document).ready(function () {
     //console.log(result);
     $("#studentViewFeedbackTBL").empty();
     $("#studentViewFeedbackTBL").append(
-      //`ph_ID`, `Ph_name`, `Ph_reg`, `LID`, `location`, `phone`
       "<thead><th>Rating</th><th>Feedback</th></thead>"
     );
     result.forEach(function (result) {
@@ -119,7 +118,6 @@ $(document).ready(function () {
     //console.log(result);
     $("#studentViewPaymentsTBL").empty();
     $("#studentViewPaymentsTBL").append(
-      //`ph_ID`, `Ph_name`, `Ph_reg`, `LID`, `location`, `phone`
       "<thead><th>Time</th><th>Package Name</th><th>Payment</th></thead>"
     );
     result.forEach(function (result) {
@@ -149,7 +147,6 @@ $(document).ready(function () {
     //console.log(result);
     $("#studentViewScheduleTBL").empty();
     $("#studentViewScheduleTBL").append(
-      //`ph_ID`, `Ph_name`, `Ph_reg`, `LID`, `location`, `phone`
       "<thead><th>Schedule Name</th><th>Days Name</th><th>Duration</th></thead>"
     );
     result.forEach(function (result) {
@@ -167,4 +164,11 @@ $(document).ready(function () {
   });
 });
 
+function maleFemale(str) {
+  if (str === "m") {
+    return "Male"
+  } else {
+    return "Female"
+  }
+}
 

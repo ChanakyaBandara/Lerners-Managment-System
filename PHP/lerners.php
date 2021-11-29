@@ -157,7 +157,7 @@
 		$db = new DbConnect;
 		$conn = $db->connect();
 
-		$stmt = $conn->prepare("SELECT student.Fname, student.Lname, student.nic, student.email, student.mobile, student.address, student.age, student.dob, student.gender FROM `student`,`student_lerners_package`,`lerners` WHERE student_lerners_package.SID=student.SID AND student_lerners_package.LID=lerners.LID AND  lerners.LID=".$_POST['viewStudents'].";");
+		$stmt = $conn->prepare("SELECT student.Fname, student.Lname, student.nic, student.email, student.mobile, student.address, student.age, student.dob, student.gender, package.PACKname, schedule.name  AS schedule FROM `student`,`student_lerners_package`,`lerners`,`package`,`student_schedule`,`schedule` WHERE student_lerners_package.SID=student.SID AND student_lerners_package.LID=lerners.LID AND student_lerners_package.PACKID=package.PACKID AND student_schedule.SID=student.SID AND student_schedule.SHID=schedule.SHID AND lerners.LID=".$_POST['viewStudents'].";");
 		$stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		echo json_encode($result);
@@ -168,7 +168,7 @@
 		$db = new DbConnect;
 		$conn = $db->connect();
 
-		$stmt = $conn->prepare("SELECT student.Fname, student.Lname, package.PACKname, payment.timestamp FROM `payment`,`student`,`lerners`,`package` WHERE payment.LID=lerners.LID AND payment.SID=student.SID AND payment.PACKID=package.PACKID AND lerners.LID=".$_POST['viewPayments'].";");
+		$stmt = $conn->prepare("SELECT student.Fname, student.Lname, package.PACKname, package.price, payment.timestamp FROM `payment`,`student`,`lerners`,`package` WHERE payment.LID=lerners.LID AND payment.SID=student.SID AND payment.PACKID=package.PACKID AND lerners.LID=".$_POST['viewPayments'].";");
 		$stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		
@@ -190,7 +190,7 @@
 		$db = new DbConnect;
 		$conn = $db->connect();
 
-		$stmt = $conn->prepare("SELECT * FROM student_lerners_package,feedback WHERE student_lerners_package.SID=feedback.SID AND student_lerners_package.LID=".$_POST['viewFeedBack'].";");
+		$stmt = $conn->prepare("SELECT student.Fname,student.Lname,student.email,feedback.feedback,feedback.rating FROM student_lerners_package,feedback,student WHERE student_lerners_package.SID=feedback.SID AND student.SID=feedback.SID AND student_lerners_package.LID=".$_POST['viewFeedBack'].";");
 		$stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		echo json_encode($result);
