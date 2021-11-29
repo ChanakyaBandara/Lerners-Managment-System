@@ -157,7 +157,7 @@ $(document).ready(function () {
         "<tr><td>" +
         result.name +
         "</td><td>" +
-        result.days +
+        result.day +
         "</td><td>" +
         result.duration +
         "</td></tr>"

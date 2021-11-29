@@ -29,6 +29,7 @@
   <!-- Icons -->
   <link rel="stylesheet" href="assets/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
@@ -256,7 +257,8 @@
 
       <div class="row">
         <div class="col-xl-12">
-          <div class="card">
+          <button class="btn btn-sm btn-primary" onclick="downloadPDF()">Download</button>
+          <div class="card" id="content">
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
@@ -360,6 +362,25 @@
   <script>
     document.getElementById("uemail").innerHTML = localStorage.getItem("uname");
     document.getElementById("LerPackNumID").value = localStorage.getItem("sid");
+
+    function downloadPDF() {
+      document.getElementById('content').style.display = 'block';
+
+      const invoice = this.document.getElementById("content");
+      const internalTable = invoice.getInnerHTML();
+      const d = new Date();
+      const template = "<div style='margin-bottom: 25px'; class><img src='assets/img/brand/blue.png' alt='logo' width='200px'/></div>" + internalTable + "<p>" + d + "</p>";
+      console.log(invoice)
+      console.log(window)
+      var opt = {
+        margin: 1,
+        filename: 'Feedback List.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().from(template).set(opt).save();
+    }
    
   </script>
   <script language="javascript" src="JS/student.js"></script>
