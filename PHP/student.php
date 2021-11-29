@@ -169,3 +169,24 @@
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		echo json_encode($result);
 	}
+
+    if(isset($_POST['saveExam'])) {
+		//$examObj = json_decode($_POST['saveExam']);
+		//".$obj->SID.",".$obj->Result."
+		$db = new DbConnect;
+        $sql = "INSERT INTO `exam`(`SID`, `result`) VALUES (1,10);";
+
+        if(!$conn = $db->connect()){
+            echo "SQL Error";
+            exit();
+        }
+        else {
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            echo '<script language="javascript">
+			alert("Exam Succesfully!");
+			window.location.href = "../student_exam_new.html"
+			</script>';
+			exit();
+        }
+	}

@@ -228,6 +228,12 @@
                 <div class="col">
                   <h3 class="mb-0">Exam</h3>
                 </div>
+                <div class="col">
+                  <h3 class="mb-0" id="questionNumber"><span id="questionNumberLable">0/20</span></h3>
+                </div>
+                <div class="col">
+                  <h3 class="mb-0" id="questionTimer"><span id="time">30:00</span></h3>
+                </div>
               </div>
             </div>
             <div class="table-responsive">
@@ -235,20 +241,21 @@
               <div class="container">
                 <form action="PHP/student.php" method="post">
                   <label for="subject"><b>Question</b></label>
-                  <textarea id="studFeedback" name="studFeedback" style="height:100px" disabled></textarea>
+                  <textarea id="studQuestion" name="studQuestion" style="height:100px" disabled></textarea>
 
                   <label><b>Answers</b></label><br>
                   <input type="radio" id="answer1" name="answer" value="1">
-                  <label for="answer1">1</label><br>
+                  <label for="answer1" id="labelanswer1">1</label><br>
                   <input type="radio" id="answer2" name="answer" value="2">
-                  <label for="answer2">2</label><br>
+                  <label for="answer2" id="labelanswer2">2</label><br>
                   <input type="radio" id="answer3" name="answer" value="3">
-                  <label for="answer3">3</label><br>
+                  <label for="answer3" id="labelanswer3">3</label><br>
                   <input type="radio" id="answer4" name="answer" value="4">
-                  <label for="answer4">4</label><br>
-                  <button class="btn bg-warning" type="button" name="addFeedback">Previous</button>
-                  <button class="btn bg-success" type="button" name="addFeedback">Next</button>
-                  <button class="btn bg-danger" type="button" name="addFeedback">Finish</button>
+                  <label for="answer4" id="labelanswer4">4</label><br>
+                  <button class="btn bg-success" type="button" id="onoff" value="Off" onclick="playBtnClick()">Start</button>
+                  <button class="btn bg-warning" type="button" onclick="prvBtnClick()">Previous</button>
+                  <button class="btn bg-success" type="button" onclick="nextBtnClick()">Next</button>
+                  <button class="btn bg-danger" type="button" onclick="saveExam()">Finish</button>
                 </form>
               </div>
             </div>
@@ -262,10 +269,14 @@
   <!-- Core -->
   <script>
     document.getElementById("uemail").innerHTML = localStorage.getItem("uname");
-    document.getElementById("LerPackNumID").value = localStorage.getItem("sid");
+    const SID = localStorage.getItem("sid");
 
 
     let resultQuestions;
+    let noOfQuestions;
+    let currentQuestionID;
+    let currentQuestionNo;
+    let currentSatate = false;
 
     $(document).ready(function () {
 
@@ -276,11 +287,93 @@
       }).done(function (result) {
         console.log("result");
         resultQuestions = JSON.parse(result);
-        console.log(resultQuestions);
+        noOfQuestions = resultQuestions.length;
+        console.log(noOfQuestions,resultQuestions);
       });
-
-
     });
+
+    function playBtnClick() {
+      currentvalue = document.getElementById('onoff').value;
+      if (currentvalue == "Off") {
+        document.getElementById("onoff").value = "On";
+        document.getElementById('onoff').innerHTML = "Finish";
+        console.log("On");
+        currentSatate = true;
+        statMCQ();
+      } else {
+        document.getElementById("onoff").value = "Off";
+        document.getElementById('onoff').innerHTML = "Start";
+        console.log("Off");
+        currentSatate = false;
+      }
+    }
+
+    function statMCQ() {
+      var fiveMinutes = 60 * 30,
+        display = document.querySelector('#time');
+      startTimer(fiveMinutes, display);
+      currentQuestionNo = 0;
+      setQuestion(0)
+    }
+
+    function prvBtnClick(){
+      if(currentQuestionNo>0){
+        setQuestion(currentQuestionNo-1)
+      }
+    }
+
+    function nextBtnClick(){
+      if(currentQuestionNo<noOfQuestions){
+        setQuestion(currentQuestionNo+1)
+      }
+    }
+
+    function setQuestion(id){
+      console.log(currentQuestionNo);
+      document.getElementById("questionNumberLable").innerHTML = String(currentQuestionNo+1)+String("/")+20
+      document.getElementById("studQuestion").value = resultQuestions[id].content;
+      currentQuestionID = resultQuestions[id].QID; 
+      document.getElementById("labelanswer1").innerHTML = resultQuestions[id].answer_1;
+      document.getElementById("labelanswer2").innerHTML = resultQuestions[id].answer_2;
+      document.getElementById("labelanswer3").innerHTML = resultQuestions[id].answer_3;
+      document.getElementById("labelanswer4").innerHTML = resultQuestions[id].answer_4;
+    }
+
+    function startTimer(duration, display) {
+      var timer = duration, minutes, seconds;
+      setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+          timer = duration;
+        }
+      }, 1000);
+    }
+
+    function saveExam(){
+      examObj = {
+        SID,
+        Result:10,
+        Content : [[1,4],[2,3]]
+      }
+      console.log(examObj)
+      const examJSON = JSON.stringify(examObj);
+      console.log(examJSON)
+
+      $.ajax({
+        url: "PHP/student.php",
+        method: "post",
+        data: "saveExam=" + examJSON
+      }).done(function (result) {
+        console.log("result");
+      });
+    }
 
   </script>
   <script language="javascript" src="JS/student.js"></script>
