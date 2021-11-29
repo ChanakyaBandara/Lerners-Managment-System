@@ -24,7 +24,7 @@ $(document).ready(function () {
     $("#studProftxtDOB").empty();
     $("#studProftxtDOB").val(result[0].dob);
     $("#studProftxtGend").empty();
-    $("#studProftxtGend").val(result[0].gender);
+    $("#studProftxtGend").val(maleFemale(result[0].gender));
     $("#studProftelAddress").empty();
     $("#studProftelAddress").val(result[0].address);
     $("#studProftelPhone").empty();
@@ -161,6 +161,35 @@ $(document).ready(function () {
       );
     });
     $("#studentViewScheduleTBL").append("</tbody>");
+  });
+});
+
+$(document).ready(function () {
+
+  $.ajax({
+    url: "PHP/student.php",
+    method: "post",
+    data: "viewExamResults=" + SID,
+  }).done(function (result) {
+    console.log(result);
+    result = JSON.parse(result);
+    //console.log(result);
+    $("#studentViewExamResultsTBL").empty();
+    $("#studentViewExamResultsTBL").append(
+      "<thead><th>Exam</th><th>Result</th>><th>Time</th></thead>"
+    );
+    result.forEach(function (result) {
+      $("#studentViewExamResultsTBL").append(
+        "<tr><td>" +
+        result.EID +
+        "</td><td>" +
+        result.result +
+        "</td><td>" +
+        result.timestamp +
+        "</td></tr>"
+      );
+    });
+    $("#studentViewExamResultsTBL").append("</tbody>");
   });
 });
 

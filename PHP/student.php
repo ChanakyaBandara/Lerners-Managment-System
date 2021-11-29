@@ -191,3 +191,13 @@
 			exit();
         }
 	}
+
+	if(isset($_POST['viewExamResults'])) {
+		$db = new DbConnect;
+		$conn = $db->connect();
+
+		$stmt = $conn->prepare("SELECT exam.EID, exam.result, exam.timestamp FROM exam,student_lerners_package WHERE exam.SID=student_lerners_package.SID  AND exam.SID=".$_POST['viewExamResults'].";");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($result);
+	}
