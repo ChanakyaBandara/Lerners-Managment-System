@@ -17,6 +17,21 @@
         }
     }
 
+	function creat_student_lerners_package($SID,$LID,$PID){
+        $db = new DbConnect;
+        $sql = "INSERT INTO `student_lerners_package`(`SID`, `LID`, `PACKID`) VALUES ('$SID','$LID','$PID')";
+
+        if(!$conn = $db->connect()){
+            echo "SQL Error";
+            exit();
+        }
+        else {
+            $conn->exec($sql);
+            $last_id = $conn->lastInsertId();
+            return $last_id;
+        }
+    }
+
 	if(isset($_POST['addStudent'])) {
 		$studRegTxtFname = $_POST['studRegTxtFname'];
 		$studRegTxtLname = $_POST['studRegTxtLname'];
@@ -29,6 +44,8 @@
 		$studRegDateBirth = $_POST['studRegDateBirth'];
         $Password = "123456789";
 
+		$studSelectedLernersId = $_POST['studSelectedLernersId'];
+		$studSelectedPackageId = $_POST['studSelectedPackageId'];
 
         $LID = creat_user($studRegTxtEmail,$Password,3);
         $db = new DbConnect;
@@ -39,8 +56,9 @@
             exit();
         }
         else {
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
+            $conn->exec($sql);
+            $last_id = $conn->lastInsertId();
+			creat_student_lerners_package($last_id,$studSelectedLernersId,$studSelectedPackageId);
             echo '<script language="javascript">
 			alert("Succesfully Registerd!");
 			window.location.href = "../index.html"

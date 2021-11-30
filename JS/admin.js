@@ -10,7 +10,6 @@ $(document).ready(function () {
     //console.log(result);
     $("#adminViewLearnersTBL").empty();
     $("#adminViewLearnersTBL").append(
-      //`ph_ID`, `Ph_name`, `Ph_reg`, `LID`, `location`, `phone`
       "<thead><th>Registration Id</th><th>Name</th><th>Owner</th><th>Email</th><th>Location</th><th>Contact No</th><th>Rating</th></thead>"
     );
     result.forEach(function (result) {
@@ -48,7 +47,6 @@ $(document).ready(function () {
     //console.log(result);
     $("#adminViewStudentsTBL").empty();
     $("#adminViewStudentsTBL").append(
-      //`ph_ID`, `Ph_name`, `Ph_reg`, `LID`, `location`, `phone`
       "<thead><th>First name</th><th>Last Name</th><th>NIC</th><th>Email</th><th>Mobile</th><th>Address</th><th>Age</th><th>Date of Birth</th><th>Gender</th></thead>"
     );
     result.forEach(function (result) {
@@ -90,7 +88,6 @@ $(document).ready(function () {
     //console.log(result);
     $("#adminViewPaymentsTBL").empty();
     $("#adminViewPaymentsTBL").append(
-      //`ph_ID`, `Ph_name`, `Ph_reg`, `LID`, `location`, `phone`
       "<thead><th>Invoice ID</th><th>Learners Name</th><th>Student Name</th><th>PakageName</th><th>Amount</th>><th>Time</th></thead>"
     );
     result.forEach(function (result) {
@@ -127,7 +124,6 @@ $(document).ready(function () {
     //console.log(result);
     $("#adminViewExamResultsTBL").empty();
     $("#adminViewExamResultsTBL").append(
-      //`ph_ID`, `Ph_name`, `Ph_reg`, `LID`, `location`, `phone`
       "<thead><th>Exam</th><th>Learners Name</th><th>Student Name</th>><th>Result</th>><th>Time</th></thead>"
     );
     result.forEach(function (result) {
@@ -161,12 +157,11 @@ $(document).ready(function () {
     //console.log(result);
     $("#lernersListTBL").empty();
     $("#lernersListTBL").append(
-      //`ph_ID`, `Ph_name`, `Ph_reg`, `LID`, `location`, `phone`
       "<thead><th>Name</th><th>Email</th><th>Location</th><th>Contact No</th></thead>"
     );
     result.forEach(function (result) {
       $("#lernersListTBL").append(
-        "<tr><td>" +
+        "<tr  onClick='lernersListTBLRowClick(" + result.LID + ",\"" + result.name + "\")'><td>" +
         result.name +
         "</td><td>" +
         result.email +
@@ -179,7 +174,10 @@ $(document).ready(function () {
     });
     $("#lernersListTBL").append("</tbody>");
   });
+
+  
 });
+
 
 function maleFemale(str) {
   if (str === "m") {
@@ -187,4 +185,44 @@ function maleFemale(str) {
   } else {
     return "Female"
   }
+}
+
+function lernersListTBLRowClick(LID,name){
+  console.log("testlog",LID,name)
+  document.getElementById("studSelectedLernersId").value = LID
+  document.getElementById("studSelectedLerners").innerHTML = "Selected Driving School - "+name
+  
+  $.ajax({
+    url: "PHP/lerners.php",
+    method: "post",
+    data: "viewPackages=" + LID,
+  }).done(function (result) {
+    console.log(result);
+    result = JSON.parse(result);
+    //console.log(result);
+    $("#PackageListTBL").empty();
+    $("#PackageListTBL").append(
+      "<thead><th>Package Name</th><th>Package Description</th><th>Package Duration</th><th>Package Cost</th></thead>"
+    );
+    result.forEach(function (result) {
+      $("#PackageListTBL").append(
+        "<tr  onClick='packageListTBLRowClick(" + result.PACKID + ",\"" + result.PACKname + "\")'><td>" +
+        result.PACKname +
+        "</td><td>" +
+        result.desciption +
+        "</td><td>" +
+        result.duration +
+        "</td><td>" +
+        result.price +
+        "</td></tr>"
+      );
+    });
+    $("#PackageListTBL").append("</tbody>");
+  });
+}
+
+function packageListTBLRowClick(PID,name){
+  console.log("testlog pack",PID,name)
+  document.getElementById("studSelectedPackageId").value = PID
+  document.getElementById("studSelectedPackage").innerHTML = "Selected Package - "+name
 }

@@ -161,7 +161,7 @@
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
-                        <label for="country">Gender</label>
+                        <label for="studRegSelGender">Gender</label>
                         <select id="studRegSelGender" name="studRegSelGender">
                           <option value="0" selected>Select Gender ...</option>
                           <option value="male">Male</option>
@@ -217,8 +217,15 @@
                 
                 <hr class="my-4" />
                 <!-- Address -->
-                <h6 class="heading-small text-muted mb-4">Select Lerners</h6>
+                <h6 class="heading-small text-muted mb-4">Select Driving School And Package </h6>
+                <label id="studSelectedLerners"></label><br>
+                <label id="studSelectedPackage"></label>
+                <input type="hidden" id="studSelectedLernersId" name="studSelectedLernersId" required>
+                <input type="hidden" id="studSelectedPackageId" name="studSelectedPackageId" required>
                 <Table  class="table align-items-center table-flush" id="lernersListTBL">
+                </Table>
+                <hr class="my-4" />
+                <Table  class="table align-items-center table-flush" id="PackageListTBL">
                 </Table>
                 <!-- Description -->
               </form>
