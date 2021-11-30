@@ -116,8 +116,6 @@
         }
     }
     
-    
-
     if(isset($_POST['viewProfile'])) {
 		$db = new DbConnect;
 		$conn = $db->connect();
@@ -137,6 +135,7 @@
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		echo json_encode($result);
 	}
+
     if(isset($_POST['viewFeedBack'])) {
 		$db = new DbConnect;
 		$conn = $db->connect();
@@ -146,6 +145,7 @@
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		echo json_encode($result);
 	}
+
     if(isset($_POST['getPackage'])) {
 		$db = new DbConnect;
 		$conn = $db->connect();
@@ -165,11 +165,12 @@
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		echo json_encode($result);
 	}
+
     if(isset($_POST['viewSchedule'])) {
 		$db = new DbConnect;
 		$conn = $db->connect();
 
-		$stmt = $conn->prepare("SELECT * FROM student_schedule,schedule WHERE student_schedule.SHID=schedule.SHID AND student_schedule.SID=".$_POST['viewSchedule'].";");
+		$stmt = $conn->prepare("SELECT schedule.`SHID`, `LID`, `name`, `day`, `duration`,student_schedule.`SID` FROM `schedule` LEFT JOIN `student_schedule` ON student_schedule.SHID=schedule.SHID AND student_schedule.SID = ".$_POST['viewSchedule'].";");
 		$stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		echo json_encode($result);
@@ -219,3 +220,21 @@
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		echo json_encode($result);
 	}
+
+	if(isset($_POST['setStudentSchedule']) && isset($_POST['setStudentScheduleSHID'])) {
+		$setStudentSchedule = $_POST['setStudentSchedule'];
+		$setStudentScheduleSHID = $_POST['setStudentScheduleSHID'];
+
+        $db = new DbConnect;
+        $sql = "REPLACE INTO `student_schedule`(`SID`, `SHID`) VALUES ('$setStudentSchedule','$setStudentScheduleSHID')";
+
+        if(!$conn = $db->connect()){
+            echo "SQL Error";
+            exit();
+        }
+        else {
+            $conn->exec($sql);
+            echo "{result:1}";
+			exit();
+        }
+    }

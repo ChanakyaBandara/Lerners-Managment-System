@@ -2,6 +2,10 @@ let SID = localStorage.getItem("sid");
 console.log(SID);
 
 $(document).ready(function () {
+  viewSchedule();
+});
+
+$(document).ready(function () {
 
   $.ajax({
     url: "PHP/student.php",
@@ -79,6 +83,7 @@ $(document).ready(function () {
 
   });
 });
+
 $(document).ready(function () {
 
   $.ajax({
@@ -142,35 +147,6 @@ $(document).ready(function () {
   $.ajax({
     url: "PHP/student.php",
     method: "post",
-    data: "viewSchedule=" + SID,
-  }).done(function (result) {
-    console.log(result);
-    result = JSON.parse(result);
-    //console.log(result);
-    $("#studentViewScheduleTBL").empty();
-    $("#studentViewScheduleTBL").append(
-      "<thead><th>Schedule Name</th><th>Days Name</th><th>Duration</th></thead>"
-    );
-    result.forEach(function (result) {
-      $("#studentViewScheduleTBL").append(
-        "<tr><td>" +
-        result.name +
-        "</td><td>" +
-        result.day +
-        "</td><td>" +
-        result.duration +
-        "</td></tr>"
-      );
-    });
-    $("#studentViewScheduleTBL").append("</tbody>");
-  });
-});
-
-$(document).ready(function () {
-
-  $.ajax({
-    url: "PHP/student.php",
-    method: "post",
     data: "viewExamResults=" + SID,
   }).done(function (result) {
     console.log(result);
@@ -195,11 +171,61 @@ $(document).ready(function () {
   });
 });
 
+function viewSchedule(){
+  $.ajax({
+    url: "PHP/student.php",
+    method: "post",
+    data: "viewSchedule=" + SID,
+  }).done(function (result) {
+    console.log(result);
+    result = JSON.parse(result);
+    //console.log(result);
+    $("#studentViewScheduleTBL").empty();
+    $("#studentViewScheduleTBL").append(
+      "<thead><th>Schedule Name</th><th>Days Name</th><th>Duration</th><th>Action</th></thead>"
+    );
+    result.forEach(function (result) {
+      $("#studentViewScheduleTBL").append(
+        "<tr><td>" +
+        result.name +
+        "</td><td>" +
+        result.day +
+        "</td><td>" +
+        result.duration +
+        "</td><td>" +
+        buttonSelect(result.SHID,result.SID) +
+        "</td></tr>"
+      );
+    });
+    $("#studentViewScheduleTBL").append("</tbody>");
+  });
+}
+
 function maleFemale(str) {
   if (str === "m") {
     return "Male"
   } else {
     return "Female"
   }
+}
+
+function buttonSelect(SHID,SID_temp){
+  if(SID_temp === "" || SID_temp === null){
+    return "<button type='button' class='btn'  onclick='selectBtnClick("+SHID+")' style='color: #ffffff; background-color: #848ccf;'>Select</button>"
+  }else{
+    return "<button type='button' class='btn' style='color: #ffffff; background-color: #323278;'>Selected</button>"
+  }
+}
+
+function selectBtnClick(SHID){
+  console.log(SHID)
+  $.ajax({
+    url: "PHP/student.php",
+    method: "post",
+    data: "setStudentSchedule=" + SID + "&setStudentScheduleSHID=" + SHID,
+  }).done(function (result) {
+    console.log(result);
+    viewSchedule();
+  });
 }
 
