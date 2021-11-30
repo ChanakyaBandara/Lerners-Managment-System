@@ -91,7 +91,7 @@ $(document).ready(function () {
     //console.log(result);
     $("#studentViewFeedbackTBL").empty();
     $("#studentViewFeedbackTBL").append(
-      "<thead><th>Rating</th><th>Feedback</th></thead>"
+      "<thead><th>Rating</th><th>Feedback</th><th>Timestamp</th></thead>"
     );
     result.forEach(function (result) {
       $("#studentViewFeedbackTBL").append(
@@ -99,6 +99,8 @@ $(document).ready(function () {
         result.rating +
         "</td><td>" +
         result.feedback +
+        "</td><td>" +
+        result.timestamp +
         "</td></tr>"
       );
     });

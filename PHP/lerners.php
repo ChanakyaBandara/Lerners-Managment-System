@@ -190,7 +190,7 @@
 		$db = new DbConnect;
 		$conn = $db->connect();
 
-		$stmt = $conn->prepare("SELECT student.Fname,student.Lname,student.email,feedback.feedback,feedback.rating FROM student_lerners_package,feedback,student WHERE student_lerners_package.SID=feedback.SID AND student.SID=feedback.SID AND student_lerners_package.LID=".$_POST['viewFeedBack'].";");
+		$stmt = $conn->prepare("SELECT student.Fname,student.Lname,student.email,feedback.feedback,feedback.rating,feedback.timestamp FROM student_lerners_package,feedback,student WHERE student_lerners_package.SID=feedback.SID AND student.SID=feedback.SID AND student_lerners_package.LID=".$_POST['viewFeedBack'].";");
 		$stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		echo json_encode($result);

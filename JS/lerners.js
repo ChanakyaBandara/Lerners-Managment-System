@@ -210,7 +210,7 @@ $(document).ready(function () {
     console.log(result);
     $("#lernersViewFeedbackTBL").empty();
     $("#lernersViewFeedbackTBL").append(
-      "<thead><th>Student</th><th>Email</th><th>Rating</th><th>Feedback</th></thead>"
+      "<thead><th>Student</th><th>Email</th><th>Rating</th><th>Feedback</th><th>Timestamp</th></thead>"
     );
     result.forEach(function (result) {
       $("#lernersViewFeedbackTBL").append(
@@ -222,6 +222,8 @@ $(document).ready(function () {
         result.rating +
         "</td><td>" +
         result.feedback +
+        "</td><td>" +
+        result.timestamp +
         "</td></tr>"
       );
     });
