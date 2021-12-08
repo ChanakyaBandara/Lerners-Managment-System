@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Page plugins -->
   <!-- Argon CSS -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -225,11 +226,14 @@
           <div class="card">
             <div class="card-header border-0">
               <div class="row align-items-center">
-                <div class="col" style="background-color: #0b7fab; padding-top: 20px; padding-bottom: 20px ;border-radius: 10px; text-align: center; margin: 10px;">
+                <div class="col"
+                  style="background-color: #0b7fab; padding-top: 20px; padding-bottom: 20px ;border-radius: 10px; text-align: center; margin: 10px;">
                   <h4 class="mb-0" style="color: #ffffff;">Question Number</h4>
-                  <h3 class="mb-0" id="questionNumber" style="color: #ffffff;"><span id="questionNumberLable">0/20</span></h3>
+                  <h3 class="mb-0" id="questionNumber" style="color: #ffffff;"><span
+                      id="questionNumberLable">0/20</span></h3>
                 </div>
-                <div class="col" style="background-color: #038aff; padding-top: 20px; padding-bottom: 20px ;border-radius: 10px; text-align: center; margin: 10px;">
+                <div class="col"
+                  style="background-color: #038aff; padding-top: 20px; padding-bottom: 20px ;border-radius: 10px; text-align: center; margin: 10px;">
                   <h4 class="mb-0" style="color: #ffffff;">Remaining Time</h4>
                   <h3 class="mb-0" id="questionTimer" style="color: #ffffff;"><span id="time">30:00</span></h3>
                 </div>
@@ -263,10 +267,14 @@
                   <label for="answer3" id="labelanswer3">3</label><br>
                   <input type="radio" id="answer4" name="answer" value="4">
                   <label for="answer4" id="labelanswer4">4</label><br>
-                  <button class="btn" type="button" id="onoff" value="Off" onclick="playBtnClick()" style="color: #ffffff; background-color: #0b7fab;">Start</button>
-                  <button class="btn" type="button" onclick="prvBtnClick()" style="color: #ffffff; background-color: #323278;">Previous</button>
-                  <button class="btn" type="button" onclick="nextBtnClick()" style="color: #ffffff; background-color: #323278;">Next</button>
-                  <button class="btn" type="button" onclick="saveExam()" style="color: #ffffff; background-color: #848ccf">Finish</button>
+                  <button class="btn" type="button" id="onoff" value="Off" onclick="playBtnClick()"
+                    style="color: #ffffff; background-color: #0b7fab;">Start</button>
+                  <button class="btn" type="button" onclick="prvBtnClick()"
+                    style="color: #ffffff; background-color: #323278;">Previous</button>
+                  <button class="btn" type="button" onclick="nextBtnClick()"
+                    style="color: #ffffff; background-color: #323278;">Next</button>
+                  <button class="btn" type="button" onclick="saveExam()"
+                    style="color: #ffffff; background-color: #848ccf">Finish</button>
                 </form>
               </div>
             </div>
@@ -278,16 +286,78 @@
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Exam Result</h4>
+        </div>
+        <div class="modal-body">
+          <table>
+            <thead>
+              <th>#</th>
+              <th>Question</th>
+              <th>Given</th>
+              <th>Correct</th>
+            </thead>
+            <tbody id="modaltblBody">
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <script>
     document.getElementById("uemail").innerHTML = localStorage.getItem("uname");
     const SID = localStorage.getItem("sid");
 
 
     let resultQuestions;
+    let answerArry = [];
     let noOfQuestions;
     let currentQuestionID;
     let currentQuestionNo;
     let currentSatate = false;
+
+    var answercheck1 = document.getElementById("answer1");
+    var answercheck2 = document.getElementById("answer2");
+    var answercheck3 = document.getElementById("answer3");
+    var answercheck4 = document.getElementById("answer4");
+
+    answercheck1.disabled = true;
+    answercheck2.disabled = true;
+    answercheck3.disabled = true;
+    answercheck4.disabled = true;
+
+    answercheck1.addEventListener('change', () => {
+      selectedAnswer(1)
+    })
+    answercheck2.addEventListener('change', () => {
+      selectedAnswer(2)
+    })
+    answercheck3.addEventListener('change', () => {
+      selectedAnswer(3)
+    })
+    answercheck4.addEventListener('change', () => {
+      selectedAnswer(4)
+    })
+
+    function selectedAnswer(answerID) {
+      //console.log(currentQuestionNo,currentQuestionID, answerID)
+      temparray = [currentQuestionID, answerID]
+      answerArry[currentQuestionNo] = temparray
+      //console.log(answerArry)
+    }
 
     $(document).ready(function () {
 
@@ -299,7 +369,7 @@
         console.log("result");
         resultQuestions = JSON.parse(result);
         noOfQuestions = resultQuestions.length;
-        console.log(noOfQuestions,resultQuestions);
+        console.log(noOfQuestions, resultQuestions);
       });
     });
 
@@ -320,6 +390,10 @@
     }
 
     function statMCQ() {
+      answercheck1.disabled = false;
+      answercheck2.disabled = false;
+      answercheck3.disabled = false;
+      answercheck4.disabled = false;
       var fiveMinutes = 60 * 30,
         display = document.querySelector('#time');
       startTimer(fiveMinutes, display);
@@ -327,23 +401,36 @@
       setQuestion(0)
     }
 
-    function prvBtnClick(){
-      if(currentQuestionNo>0){
-        setQuestion(currentQuestionNo-1)
+    function prvBtnClick() {
+      if (currentQuestionNo > 0) {
+        answercheck1.checked = false;
+        answercheck2.checked = false;
+        answercheck3.checked = false;
+        answercheck4.checked = false;
+        setQuestion(currentQuestionNo - 1)
+      } else {
+        alert("First Question")
       }
     }
 
-    function nextBtnClick(){
-      if(currentQuestionNo<noOfQuestions){
-        setQuestion(currentQuestionNo+1)
+    function nextBtnClick() {
+      if (currentQuestionNo < (noOfQuestions - 1)) {
+        answercheck1.checked = false;
+        answercheck2.checked = false;
+        answercheck3.checked = false;
+        answercheck4.checked = false;
+        setQuestion(currentQuestionNo + 1)
+      } else {
+        alert("Final Question")
       }
     }
 
-    function setQuestion(id){
+    function setQuestion(id) {
+      currentQuestionNo = id
       console.log(currentQuestionNo);
-      document.getElementById("questionNumberLable").innerHTML = String(currentQuestionNo+1)+String("/")+20
+      document.getElementById("questionNumberLable").innerHTML = String(currentQuestionNo + 1) + String("/") + 20
       document.getElementById("studQuestion").value = resultQuestions[id].content;
-      currentQuestionID = resultQuestions[id].QID; 
+      currentQuestionID = Number(resultQuestions[id].QID);
       document.getElementById("labelanswer1").innerHTML = resultQuestions[id].answer_1;
       document.getElementById("labelanswer2").innerHTML = resultQuestions[id].answer_2;
       document.getElementById("labelanswer3").innerHTML = resultQuestions[id].answer_3;
@@ -367,11 +454,18 @@
       }, 1000);
     }
 
-    function saveExam(){
+    function saveExam() {
+      finalResult = 0
+      for (let i = 0; i < answerArry.length; i++) {
+        console.log(answerArry[i])
+        if (answerArry[i][1] === Number(resultQuestions[i].correct_answer)) {
+          finalResult = finalResult + 1
+        }
+      }
       examObj = {
         SID,
-        Result:8,
-        Content : [[1,1],[2,1]]
+        Result: finalResult,
+        Content: answerArry
       }
       console.log(examObj)
       const examJSON = JSON.stringify(examObj);
@@ -383,21 +477,37 @@
         data: "saveExam=" + examJSON
       }).done(function (result) {
         console.log(result);
+        $("#modaltblBody").empty();
+        resultQuestions.forEach(function (Question, index) {
+          const tempNum = index+1
+          $("#modaltblBody").append(
+            "<tr><td>" +
+            tempNum +
+            "</td><td>" +
+            Question.content +
+            "</td><td>" +
+            answerArry[index][1] +
+            "</td><td>" +
+            Question.correct_answer +
+            "</td></tr>"
+          );
+        });
+        $("#myModal").modal();
       });
     }
 
   </script>
   <script language="javascript" src="JS/student.js"></script>
-  <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/vendor/js-cookie/js.cookie.js"></script>
-  <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-  <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/js-cookie/js.cookie.js"></script>
+  <script src="assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Optional JS -->
-  <script src="../assets/vendor/chart.js/dist/Chart.min.js"></script>
-  <script src="../assets/vendor/chart.js/dist/Chart.extension.js"></script>
+  <script src="assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
-  <script src="../assets/js/argon.js?v=1.2.0"></script>
+  <script src="assets/js/argon.js?v=1.2.0"></script>
 </body>
 
 </html>
