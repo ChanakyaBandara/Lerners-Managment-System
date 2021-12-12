@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2021 at 11:22 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.13
+-- Generation Time: Nov 29, 2021 at 03:43 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -96,17 +97,16 @@ CREATE TABLE `feedback` (
   `FID` int(11) NOT NULL,
   `SID` int(11) NOT NULL,
   `feedback` varchar(255) NOT NULL,
-  `rating` float NOT NULL,
-  `timestamp` date NOT NULL DEFAULT current_timestamp()
+  `rating` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `feedback`
 --
 
-INSERT INTO `feedback` (`FID`, `SID`, `feedback`, `rating`, `timestamp`) VALUES
-(1, 1, 'sdfs', 3, '2021-12-12'),
-(2, 1, '22', 5, '2021-12-12');
+INSERT INTO `feedback` (`FID`, `SID`, `feedback`, `rating`) VALUES
+(1, 1, 'sdfs', 3),
+(2, 1, '22', 5);
 
 -- --------------------------------------------------------
 

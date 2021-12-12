@@ -269,3 +269,67 @@ function maleFemale(str) {
     return "Female"
   }
 }
+
+function loadLernersDashBoard(){
+
+  $.ajax({
+    url: "PHP/lerners.php",
+    method: "post",
+    data: "lernersDashboard=" + LeID,
+  }).done(function (result) {
+    console.log(result);
+    result = JSON.parse(result);
+    console.log(result);
+    document.getElementById("studentCount").innerHTML = result['studentCount']
+    document.getElementById("packageCount").innerHTML = result['packageCount']
+    document.getElementById("schedulecount").innerHTML = result['schedulecount']
+    document.getElementById("packagepayment").innerHTML = result['packagepayment'] + " LKR"
+
+    $("#lernersDashStudents").empty();
+    $("#lernersDashStudents").append(
+      "<thead><th>Name</th><th>NIC</th><th>Email</th><th>Mobile</th> <th>Address</th><th>Age</th><th>Gender</th></thead>"
+    );
+    result['StudentList'].forEach(function (result) {
+      $("#lernersDashStudents").append(
+        "<tr><td>" +
+        result.Fname +
+        result.Lname +
+        "</td><td>" +
+        result.nic +
+        "</td><td>" +
+        result.email +
+        "</td><td>" +
+        result.mobile +
+        "</td><td>" +
+        result.address +
+        "</td><td>" +
+        result.age +
+        "</td><td>" +
+        maleFemale(result.gender)+
+        "</td></tr>"
+      );
+    });
+    $("#lernersDashStudents").append("</tbody>");
+
+    $("#lernersDashPackage").empty();
+    $("#lernersDashPackage").append(
+      "<thead><th>package Name</th><th>Description</th><th>Duration</th><th>Price</th></thead>"
+    );
+
+    result['PackageList'].forEach(function (result) {
+      $("#lernersDashPackage").append(
+        "<tr><td>" +
+        result.PACKname +
+        "</td><td>" +
+        result.desciption +
+        "</td><td>" +
+        result.duration +
+        "</td><td>" +
+        result.price +
+        "</td></tr>"
+      );
+    });
+    $("#lernersDashPackage").append("</tbody>");
+
+  });
+}
