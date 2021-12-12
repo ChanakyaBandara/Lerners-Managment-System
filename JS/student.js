@@ -113,6 +113,64 @@ $(document).ready(function () {
   });
 });
 
+function loadStudentDashBoard(){
+
+  $.ajax({
+    url: "PHP/student.php",
+    method: "post",
+    data: "studentDashboard=" + SID,
+  }).done(function (result) {
+    console.log(result);
+    result = JSON.parse(result);
+    console.log(result);
+    document.getElementById("examCount").innerHTML = result['examCount']
+    document.getElementById("feedbackCount").innerHTML = result['feedbackCount']
+    document.getElementById("schedule").innerHTML = result['schedule']
+    document.getElementById("packagepayment").innerHTML = result['packagepayment'] + " LKR"
+
+    $("#studentDashExam").empty();
+    $("#studentDashExam").append(
+      "<thead><th>Exam IDe</th><th>Results</th><th>Date</th></thead>"
+    );
+    result['ExamList'].forEach(function (result) {
+      $("#studentDashExam").append(
+        "<tr><td>" +
+        result.EID +
+        "</td><td>" +
+        result.result +
+        "</td><td>" +
+        result.timestamp +
+        "</td></tr>"
+      );
+    });
+    $("#studentDashExam").append("</tbody>");
+
+    $("#studentDashPackage").empty();
+    $("#studentDashPackage").append(
+      "<thead><th>package Name</th><th>Description</th><th>Duration</th><th>Price</th></thead>"
+    );
+
+    result['PackageList'].forEach(function (result) {
+      $("#studentDashPackage").append(
+        "<tr><td>" +
+        "<tr><td>" +
+        result.PACKname +
+        "</td><td>" +
+        result.desciption +
+        "</td><td>" +
+        result.duration +
+        "</td><td>" +
+        result.price +
+        "</td></tr>"
+      );
+    });
+    $("#studentDashExam").append("</tbody>");
+
+  });
+}
+
+
+
 $(document).ready(function () {
 
   $.ajax({
