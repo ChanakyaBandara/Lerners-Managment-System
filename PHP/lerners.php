@@ -206,6 +206,81 @@
 		echo json_encode($result);
 	}
 
+    // if(isset($_POST['lernersDashboard'])) {
+    //     $db = new DbConnect;
+    //     $conn = $db->connect();
+
+    //     $adminDashboardObj = new \stdClass();
+
+    //     $stmt = $conn->prepare("SELECT COUNT(SID) AS student_count FROM `student`");
+    //     $stmt->execute();
+    //     $studentCount_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //     $adminDashboardObj->studentCount =$studentCount_result[0]['student_count'];
+
+    //     $stmt = $conn->prepare("SELECT COUNT(LID) AS lerners_count FROM `lerners`");
+    //     $stmt->execute();
+    //     $lernersCount_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //     $adminDashboardObj->lernersCount =$lernersCount_result[0]['lerners_count'];
+
+    //     $stmt = $conn->prepare("SELECT COUNT(QID) AS question_bank_count FROM `question_bank`");
+    //     $stmt->execute();
+    //     $question_bankCount_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //     $adminDashboardObj->question_bankCount =$question_bankCount_result[0]['question_bank_count'];
+
+    //     $stmt = $conn->prepare("SELECT SUM(package.price)  AS tot_payment FROM `payment`,`package` WHERE `payment`.`PACKID`=`package`.`PACKID`");
+    //     $stmt->execute();
+    //     $tot_payment_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //     $adminDashboardObj->tot_payment =$tot_payment_result[0]['tot_payment'];
+
+    //     $stmt = $conn->prepare("SELECT * FROM `lerners` LIMIT 5;");
+    //     $stmt->execute();
+    //     $adminDashboardObj->lernersList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    //     $stmt = $conn->prepare("SELECT * FROM `student` LIMIT 5;");
+    //     $stmt->execute();
+    //     $adminDashboardObj->studentList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    //     echo json_encode($adminDashboardObj);
+    // }
+
+
+    if(isset($_POST['lernersDashboard'])) {
+		$db = new DbConnect;
+		$conn = $db->connect();
+
+		$lernersDashboardObj = new \stdClass();
+
+		$stmt = $conn->prepare("SELECT COUNT(SLPID) AS student_count FROM `student_lerners_package` WHERE LID=".$_POST['lernersDashboard'].";");
+		$stmt->execute();
+		$studentCount_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$lernersDashboardObj->studentCount =$studentCount_result[0]['student_count'];
+
+		$stmt = $conn->prepare("SELECT COUNT(PACKID) AS package_count FROM `package` WHERE LID =".$_POST['lernersDashboard'].";");
+		$stmt->execute();
+		$packageCount_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$lernersDashboardObj->packageCount =$packageCount_result[0]['package_count'];
+
+		$stmt = $conn->prepare("SELECT Count(schedule.SHID) AS schedule_count FROM `schedule`WHERE LID=".$_POST['lernersDashboard'].";");
+		$stmt->execute();
+		$schedule_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$lernersDashboardObj->schedulecount =$schedule_result[0]['schedule_count'];
+
+		$stmt = $conn->prepare("SELECT SUM(package.price)  AS package_payment FROM `payment`,`package` WHERE payment.PACKID=package.PACKID AND payment.LID=".$_POST['lernersDashboard'].";");
+		$stmt->execute();
+		$packagepayment_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$lernersDashboardObj->packagepayment =$packagepayment_result[0]['package_payment'];
+
+		$stmt = $conn->prepare("SELECT * FROM `package` WHERE LID=".$_POST['lernersDashboard']." LIMIT 5;");
+		$stmt->execute();
+		$lernersDashboardObj->PackageList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$stmt = $conn->prepare("SELECT * FROM `student_lerners_package`,`student` WHERE LID=".$_POST['lernersDashboard']." LIMIT 5;");
+		$stmt->execute();
+		$lernersDashboardObj->StudentList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		echo json_encode($lernersDashboardObj);
+	}
+
 
         ?>
 

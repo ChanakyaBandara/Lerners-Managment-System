@@ -237,4 +237,43 @@
             echo "{result:1}";
 			exit();
         }
+
+		
     }
+
+	if(isset($_POST['studentDashboard'])) {
+		$db = new DbConnect;
+		$conn = $db->connect();
+
+		$studentDashboardObj = new \stdClass();
+
+		$stmt = $conn->prepare("SELECT COUNT(EID) AS exam_count FROM `exam` WHERE exam.SID=".$_POST['studentDashboard'].";");
+		$stmt->execute();
+		$examCount_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$studentDashboardObj->examCount =$examCount_result[0]['exam_count'];
+
+		$stmt = $conn->prepare("SELECT COUNT(FID) AS feedback_count FROM `feedback` WHERE feedback.SID=".$_POST['studentDashboard'].";");
+		$stmt->execute();
+		$feedbackCount_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$studentDashboardObj->feedbackCount =$feedbackCount_result[0]['feedback_count'];
+
+		$stmt = $conn->prepare("SELECT Count(schedule.SHID) AS schedule_count FROM `schedule`,`student_lerners_package` WHERE schedule.LID=student_lerners_package.LID AND student_lerners_package.SID= ".$_POST['studentDashboard'].";");
+		$stmt->execute();
+		$schedule_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$studentDashboardObj->schedule =$schedule_result[0]['schedule_count'];
+
+		$stmt = $conn->prepare("SELECT SUM(package.price)  AS package_payment FROM `payment`,`package` WHERE `payment`.`PACKID`=`package`.`PACKID` AND payment.SID=".$_POST['studentDashboard'].";");
+		$stmt->execute();
+		$packagepayment_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$studentDashboardObj->packagepayment =$packagepayment_result[0]['package_payment'];
+
+		$stmt = $conn->prepare("SELECT * FROM `exam` WHERE exam.SID=".$_POST['studentDashboard']." LIMIT 5;");
+		$stmt->execute();
+		$studentDashboardObj->ExamList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$stmt = $conn->prepare("SELECT * FROM `payment`,`package` WHERE `payment`.`PACKID`=`package`.`PACKID` AND payment.SID=".$_POST['studentDashboard']." LIMIT 5;");
+		$stmt->execute();
+		$studentDashboardObj->PackageList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		echo json_encode($studentDashboardObj);
+	}
