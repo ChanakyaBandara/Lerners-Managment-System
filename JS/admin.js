@@ -226,3 +226,59 @@ function packageListTBLRowClick(PID,name){
   document.getElementById("studSelectedPackageId").value = PID
   document.getElementById("studSelectedPackage").innerHTML = "Selected Package - "+name
 }
+
+function loadAdminDashBoard(){
+
+  $.ajax({
+    url: "PHP/admin.php",
+    method: "post",
+    data: "adminDashboard=" + 5,
+  }).done(function (result) {
+    console.log(result);
+    result = JSON.parse(result);
+    console.log(result);
+    document.getElementById("lernersCount").innerHTML = result['lernersCount']
+    document.getElementById("studentCount").innerHTML = result['studentCount']
+    document.getElementById("totalQuestions").innerHTML = result['question_bankCount']
+    document.getElementById("totalPayments").innerHTML = result['tot_payment'] + " LKR"
+
+    $("#adminDashBoardViewLearnersTBL").empty();
+    $("#adminDashBoardViewLearnersTBL").append(
+      "<thead class=\"thead-light\"><th>Registration Id</th><th>Name</th><th>Location</th><th>Contact No</th></thead>"
+    );
+    result['lernersList'].forEach(function (result) {
+      $("#adminDashBoardViewLearnersTBL").append(
+        "<tr><td>" +
+        result.reg_no +
+        "</td><td>" +
+        result.name +
+        "</td><td>" +
+        result.location +
+        "</td><td>" +
+        result.mobile +
+        "</td></tr>"
+      );
+    });
+    $("#adminDashBoardViewLearnersTBL").append("</tbody>");
+
+    $("#adminDashBoardViewStudentsTBL").empty();
+    $("#adminDashBoardViewStudentsTBL").append(
+      "<thead class=\"thead-light\"><th>Name</th><th>Age</th><th>Gender</th></thead>"
+    );
+    result['studentList'].forEach(function (result) {
+      $("#adminDashBoardViewStudentsTBL").append(
+        "<tr><td>" +
+        result.Fname +
+        " " +
+        result.Lname +
+        "</td><td>" +
+        result.age +
+        "</td><td>" +
+        maleFemale(result.gender) +
+        "</td></tr>"
+      );
+    });
+    $("#adminDashBoardViewStudentsTBL").append("</tbody>");
+
+  });
+}
